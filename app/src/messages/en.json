@@ -19,7 +19,36 @@
     "resetPassword": "Reset password",
     "sendMagicLink": "Send magic link",
     "verifyCode": "Verify code",
-    "twoFactorAuth": "Two-factor authentication"
+    "twoFactorAuth": "Two-factor authentication",
+    "magicLink": {
+      "title": "Magic link",
+      "description": "We'll send you a link to sign in",
+      "sent": "Check your email for a magic link",
+      "error": "Failed to send magic link"
+    },
+    "passkey": {
+      "title": "Passkey",
+      "description": "Sign in with your device",
+      "add": "Add passkey",
+      "remove": "Remove passkey",
+      "error": "Passkey authentication failed"
+    },
+    "twoFactor": {
+      "title": "Two-factor authentication",
+      "enable": "Enable 2FA",
+      "disable": "Disable 2FA",
+      "code": "Authentication code",
+      "qrCode": "Scan this QR code with your authenticator app",
+      "backupCodes": "Backup codes",
+      "saveBackupCodes": "Save these backup codes in a safe place",
+      "error": "Invalid authentication code"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailAlreadyExists": "This email is already registered",
+      "rateLimited": "Too many attempts. Please try again later",
+      "sessionExpired": "Your session has expired. Please log in again"
+    }
   },
   "nav": {
     "dashboard": "Dashboard",

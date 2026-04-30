@@ -19,7 +19,36 @@
     "resetPassword": "Reinitialiser le mot de passe",
     "sendMagicLink": "Envoyer le lien magique",
     "verifyCode": "Verifier le code",
-    "twoFactorAuth": "Authentification a deux facteurs"
+    "twoFactorAuth": "Authentification a deux facteurs",
+    "magicLink": {
+      "title": "Lien magique",
+      "description": "Nous t'enverrons un lien pour te connecter",
+      "sent": "Verifie ton email pour recevoir le lien magique",
+      "error": "Echec de l'envoi du lien magique"
+    },
+    "passkey": {
+      "title": "Cle d'acces",
+      "description": "Connecte-toi avec ton appareil",
+      "add": "Ajouter une cle d'acces",
+      "remove": "Supprimer la cle d'acces",
+      "error": "Echec de l'authentification par cle d'acces"
+    },
+    "twoFactor": {
+      "title": "Authentification a deux facteurs",
+      "enable": "Activer la 2FA",
+      "disable": "Desactiver la 2FA",
+      "code": "Code d'authentification",
+      "qrCode": "Scanne ce QR code avec ton application d'authentification",
+      "backupCodes": "Codes de secours",
+      "saveBackupCodes": "Conserve ces codes de secours en lieu sur",
+      "error": "Code d'authentification invalide"
+    },
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "emailAlreadyExists": "Cet email est deja enregistre",
+      "rateLimited": "Trop de tentatives. Reessaie plus tard",
+      "sessionExpired": "Ta session a expire. Reconnecte-toi"
+    }
   },
   "nav": {
     "dashboard": "Tableau de bord",

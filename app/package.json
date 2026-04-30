@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@better-auth/passkey": "^1.6.9",
     "@serwist/next": "^9.5.9",
     "@stripe/stripe-js": "^9.4.0",
     "@tanstack/react-query": "^5.100.6",
