@@ -1,0 +1,39 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Loschen",
+    "edit": "Bearbeiten",
+    "close": "Schliessen"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "forgotPassword": "Passwort vergessen?",
+    "resetPassword": "Passwort zurucksetzen",
+    "sendMagicLink": "Magic Link senden",
+    "verifyCode": "Code verifizieren",
+    "twoFactorAuth": "Zwei-Faktor-Authentifizierung"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "providers": "Providers",
+    "workflows": "Workflows",
+    "radar": "Radar",
+    "budgets": "Budgets",
+    "settings": "Einstellungen",
+    "billing": "Abrechnung"
+  },
+  "landing": {
+    "title": "Verfolgen Sie Ihre KI-Kosten in Echtzeit",
+    "subtitle": "Uberwachen Sie Ihre Ausgaben uber alle LLM-Anbieter",
+    "getStarted": "Loslegen",
+    "learnMore": "Mehr erfahren"
+  }
+}

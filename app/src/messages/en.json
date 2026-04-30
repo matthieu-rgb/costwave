@@ -1,0 +1,39 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset password",
+    "sendMagicLink": "Send magic link",
+    "verifyCode": "Verify code",
+    "twoFactorAuth": "Two-factor authentication"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "providers": "Providers",
+    "workflows": "Workflows",
+    "radar": "Radar",
+    "budgets": "Budgets",
+    "settings": "Settings",
+    "billing": "Billing"
+  },
+  "landing": {
+    "title": "Track your AI costs in real-time",
+    "subtitle": "Monitor spending across all your LLM providers",
+    "getStarted": "Get started",
+    "learnMore": "Learn more"
+  }
+}

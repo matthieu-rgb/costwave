@@ -1,0 +1,39 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succes",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "logout": "Se deconnecter",
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublie ?",
+    "resetPassword": "Reinitialiser le mot de passe",
+    "sendMagicLink": "Envoyer le lien magique",
+    "verifyCode": "Verifier le code",
+    "twoFactorAuth": "Authentification a deux facteurs"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "providers": "Providers",
+    "workflows": "Workflows",
+    "radar": "Radar",
+    "budgets": "Budgets",
+    "settings": "Parametres",
+    "billing": "Facturation"
+  },
+  "landing": {
+    "title": "Suivez vos couts IA en temps reel",
+    "subtitle": "Surveillez vos depenses sur tous vos providers LLM",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus"
+  }
+}
