@@ -1,0 +1,8 @@
+# Personal design archive (not for repo)
+design-archive/
+
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Claude Code will expand this in Phase 0
