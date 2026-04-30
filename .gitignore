@@ -5,4 +5,33 @@ design-archive/
 .DS_Store
 **/.DS_Store
 
-# Claude Code will expand this in Phase 0
+# Node
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.turbo/
+.swc/
+*.log
+
+# Lock files
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# Python
+.venv/
+venv/
+*.pyc
+__pycache__/
+
+# Generated
+app/public/docs/
+app/public/locales/
