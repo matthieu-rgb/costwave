@@ -4,18 +4,20 @@ const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 12; // GCM standard IV length
 const TAG_LENGTH = 16; // Maximum auth tag length for GCM
 const VERSION = 'v1'; // Format versioning for future migrations
+const PEPPER_VERSION = 'pv1'; // Pepper rotation tracking
 
 /**
  * Encrypts plaintext using AES-256-GCM with a random IV per encryption.
  *
- * Format: v1:iv:tag:ciphertext (all hex-encoded)
+ * Format: v1:pv1:iv:tag:ciphertext (all hex-encoded)
  * - Version prefix enables future algorithm migrations
+ * - Pepper version tracks ENCRYPTION_PEPPER rotation
  * - IV is 12 bytes random, unique per encryption (never reused)
  * - Tag is 16 bytes authentication tag from GCM
  *
  * @param plaintext - String to encrypt (e.g., API key)
  * @param key - 32-byte encryption key (from deriveKey)
- * @returns Hex-encoded string in format v1:iv:tag:ciphertext
+ * @returns Hex-encoded string in format v1:pv1:iv:tag:ciphertext
  *
  * @throws Error if encryption fails
  */
@@ -32,14 +34,14 @@ export function encrypt(plaintext: string, key: Buffer): string {
 
   const tag = cipher.getAuthTag();
 
-  // Security: version prefix enables future algorithm changes
-  return `${VERSION}:${iv.toString('hex')}:${tag.toString('hex')}:${encrypted}`;
+  // Security: version prefix enables future algorithm changes, pepper version for key rotation
+  return `${VERSION}:${PEPPER_VERSION}:${iv.toString('hex')}:${tag.toString('hex')}:${encrypted}`;
 }
 
 /**
  * Decrypts ciphertext encrypted with encrypt().
  *
- * @param ciphertext - Hex-encoded string in format v1:iv:tag:ciphertext
+ * @param ciphertext - Hex-encoded string in format v1:pv1:iv:tag:ciphertext
  * @param key - Same 32-byte key used for encryption
  * @returns Original plaintext
  *
@@ -51,14 +53,18 @@ export function decrypt(ciphertext: string, key: Buffer): string {
   }
 
   const parts = ciphertext.split(':');
-  if (parts.length !== 4) {
-    throw new Error('Invalid ciphertext format (expected v1:iv:tag:encrypted)');
+  if (parts.length !== 5) {
+    throw new Error('Invalid ciphertext format (expected v1:pv1:iv:tag:encrypted)');
   }
 
-  const [version, ivHex, tagHex, encrypted] = parts;
+  const [version, pepperVersion, ivHex, tagHex, encrypted] = parts;
 
   if (version !== VERSION) {
     throw new Error(`Unsupported ciphertext version: ${version}`);
+  }
+
+  if (pepperVersion !== PEPPER_VERSION) {
+    throw new Error(`Unsupported pepper version: ${pepperVersion} (current: ${PEPPER_VERSION})`);
   }
 
   const iv = Buffer.from(ivHex, 'hex');

@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, integer, numeric, jsonb, index } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid, integer, numeric, jsonb, index, type PgTable } from 'drizzle-orm/pg-core';
 import { user } from './auth';
 
 export const workflow = pgTable(
@@ -26,7 +26,7 @@ export const event = pgTable(
       .references(() => user.id, { onDelete: 'cascade' }),
     workflowId: uuid('workflowId').references(() => workflow.id, { onDelete: 'set null' }),
     runId: uuid('runId'),
-    parentRunId: uuid('parentRunId').references(() => event.id, { onDelete: 'set null' }),
+    parentRunId: uuid('parentRunId').references((): any => event.id, { onDelete: 'set null' }),
     type: text('type').notNull(),
     status: text('status').notNull(), // 'started' | 'success' | 'error'
     startedAt: timestamp('startedAt', { withTimezone: true }).notNull(),
