@@ -10,6 +10,7 @@ import { deriveVaultKey } from '@/lib/crypto/vault';
 import { getProvider } from '@/lib/providers/registry';
 import { ProviderTypeSchema } from '@/lib/providers/types';
 import { eq, and } from 'drizzle-orm';
+import { canAddProvider } from '@/lib/auth/feature-gate';
 
 const AddProviderSchema = z.object({
   providerType: ProviderTypeSchema,
@@ -76,6 +77,12 @@ export async function addProvider(input: AddProviderInput): Promise<ActionResult
 
     if (!session?.user?.id) {
       return { success: false, error: 'Unauthorized' };
+    }
+
+    // Check plan limits
+    const { allowed } = await canAddProvider(session.user.id);
+    if (!allowed) {
+      return { success: false, error: 'Provider limit reached. Upgrade to Pro for unlimited providers.' };
     }
 
     // Validate input

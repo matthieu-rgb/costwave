@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { AddProviderDialog } from '@/components/app/AddProviderDialog';
+import { UpgradePrompt } from '@/components/app/UpgradePrompt';
+import { canAddProvider } from '@/lib/auth/feature-gate';
 
 export default async function ProvidersPage() {
   const session = await auth.api.getSession({
@@ -22,6 +24,8 @@ export default async function ProvidersPage() {
     where: eq(providerCredential.userId, session.user.id),
     orderBy: desc(providerCredential.createdAt),
   });
+
+  const { allowed, currentCount, maxAllowed } = await canAddProvider(session.user.id);
 
   const providerNames: Record<string, string> = {
     anthropic: 'Anthropic',
@@ -42,8 +46,16 @@ export default async function ProvidersPage() {
             Manage your LLM provider API credentials
           </p>
         </div>
-        <AddProviderDialog />
+        {allowed ? (
+          <AddProviderDialog />
+        ) : (
+          <Button disabled className="font-mono text-xs tracking-[0.15em]">
+            LIMIT REACHED
+          </Button>
+        )}
       </div>
+
+      {!allowed && <UpgradePrompt feature="providers" currentCount={currentCount} maxAllowed={maxAllowed} />}
 
       {providers.length === 0 ? (
         <Card className="rounded-none border-[hsl(var(--mc-border))] bg-[hsl(var(--mc-panel))] p-12">

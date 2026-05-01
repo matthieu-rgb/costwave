@@ -6,6 +6,7 @@ import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { budget, auditLog } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
+import { canAddBudget } from '@/lib/auth/feature-gate';
 
 const CreateBudgetSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100, 'Name too long'),
@@ -89,6 +90,12 @@ export async function createBudget(input: CreateBudgetInput): Promise<ActionResu
 
     if (!session?.user?.id) {
       return { success: false, error: 'Unauthorized' };
+    }
+
+    // Check plan limits
+    const { allowed } = await canAddBudget(session.user.id);
+    if (!allowed) {
+      return { success: false, error: 'Budget limit reached. Upgrade to Pro for unlimited budgets.' };
     }
 
     // Validate input

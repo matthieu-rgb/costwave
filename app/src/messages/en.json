@@ -225,5 +225,175 @@
       "enable": "Enable",
       "dismiss": "Not now"
     }
+  },
+  "billing": {
+    "title": "Billing",
+    "subtitle": "Manage your subscription and plan",
+    "currentPlan": "Current Plan",
+    "active": "Active",
+    "renewsOn": "Renews on",
+    "planComparison": "Plan Comparison",
+    "manage": "Manage Subscription",
+    "upgrade": "Upgrade to Pro",
+    "upgradePrompt": "Upgrade to Pro to unlock unlimited providers, budgets, and real-time Radar",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "perMonth": "EUR/month",
+    "perYear": "EUR/year",
+    "currentPlanBadge": "Current Plan",
+    "recommended": "Recommended",
+    "savings": "savings",
+    "or": "or",
+    "features": {
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "History",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Push notifications",
+      "prioritySupport": "Priority support",
+      "exports": "CSV/JSON exports",
+      "unlimited": "Unlimited",
+      "viewOnly": "View only",
+      "realtime": "Realtime",
+      "days": "days"
+    },
+    "plan": {
+      "free": {
+        "name": "Free",
+        "description": "For individuals and small projects",
+        "feature1": "1 provider connected",
+        "feature2": "1 budget",
+        "feature3": "30 days history",
+        "feature4": "Dashboard access",
+        "feature5": "Basic alerts"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "For teams and production workloads",
+        "feature1": "Unlimited providers",
+        "feature2": "Unlimited budgets",
+        "feature3": "Unlimited history",
+        "feature4": "Claude Code Radar (realtime)",
+        "feature5": "Push notifications",
+        "feature6": "Priority support",
+        "feature7": "CSV/JSON exports"
+      }
+    },
+    "actions": {
+      "upgradeMonthly": "Upgrade Monthly (4.99 EUR/mo)",
+      "upgradeYearly": "Upgrade Yearly (39.99 EUR/yr)",
+      "manageSubscription": "Manage Subscription"
+    }
+  },
+  "limits": {
+    "reached": "Limit Reached",
+    "upgradeTo": "Upgrade to Pro",
+    "message": "You have {current}/{max} {feature} on the Free plan."
+  },
+  "marketing": {
+    "hero": {
+      "badge": "Now in Beta",
+      "title": "Your LLM cost",
+      "titleHighlight": "observatory",
+      "subtitle": "Track every dollar spent on LLM inference in real-time across all your providers. See Claude Code work from the inside.",
+      "cta": "Sign up — Free forever",
+      "ctaSecondary": "Learn more",
+      "trustBadge": "No credit card · Open source agent · SOC 2 in progress"
+    },
+    "features": {
+      "sectionLabel": "// Features",
+      "heading": "Built like a cockpit. Not like a dashboard.",
+      "multiProvider": {
+        "label": "Multi-Provider",
+        "title": "All providers, one view",
+        "description": "Anthropic, OpenAI, Groq, Mistral, xAI. Track usage, tokens, latency, and cost in real-time across all your LLM providers."
+      },
+      "radar": {
+        "label": "Claude Code Radar",
+        "title": "Real-time agent trace",
+        "description": "Visualize the main agent, sub-agents, files accessed, tools called. Context window usage shown like a fuel gauge."
+      },
+      "budgets": {
+        "label": "Budgets & Alerts",
+        "title": "Set limits, stay safe",
+        "description": "Define budgets by provider, model, or workflow. Get alerts at 75/90/100% thresholds via email, Slack, or webhook."
+      },
+      "mobile": {
+        "label": "Anywhere Access",
+        "title": "Desktop + Mobile PWA",
+        "description": "Full cockpit on desktop, alerts on mobile. Install as a PWA, works offline, native push notifications."
+      }
+    },
+    "pricingTeaser": {
+      "label": "// Pricing",
+      "heading": "Start free. Upgrade when ready.",
+      "description": "Free plan includes 1 provider, 1 budget, and 30 days of history. Pro unlocks everything for 4.99 EUR/month.",
+      "cta": "View Full Pricing"
+    },
+    "finalCta": {
+      "heading": "Ready to track your LLM costs?",
+      "description": "Sign up in 30 seconds. No credit card required.",
+      "cta": "Get Started Free"
+    },
+    "header": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "docs": "Docs",
+      "signin": "Sign In",
+      "signup": "Sign Up"
+    },
+    "footer": {
+      "tagline": "LLM cost observability platform. Built in France, operated in Europe.",
+      "product": "Product",
+      "legal": "Legal",
+      "connect": "Connect",
+      "features": "Features",
+      "pricing": "Pricing",
+      "docs": "Documentation",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "github": "GitHub",
+      "contact": "Contact",
+      "rights": "All rights reserved"
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Simple, transparent pricing. Start free, upgrade when you need more.",
+    "sectionLabel": "// Pricing",
+    "heading": "Simple, transparent pricing",
+    "description": "Start free. Upgrade when you need unlimited providers and real-time features.",
+    "free": {
+      "name": "Free",
+      "price": "0",
+      "period": "EUR / month",
+      "description": "For individuals & small projects",
+      "cta": "Start Free"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "4.99",
+      "period": "EUR / month",
+      "yearlyPrice": "39.99 EUR/year",
+      "yearlySavings": "~20% savings",
+      "description": "For teams & production workloads",
+      "cta": "Upgrade to Pro",
+      "recommended": "Recommended"
+    },
+    "comparison": {
+      "title": "Feature Comparison",
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "History",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Push notifications",
+      "prioritySupport": "Priority support",
+      "exports": "CSV/JSON exports",
+      "unlimited": "Unlimited",
+      "viewOnly": "View only",
+      "realtime": "Realtime",
+      "days": "days"
+    }
   }
 }

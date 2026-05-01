@@ -225,5 +225,175 @@
       "enable": "Activer",
       "dismiss": "Pas maintenant"
     }
+  },
+  "billing": {
+    "title": "Facturation",
+    "subtitle": "Gere ton abonnement et ton plan",
+    "currentPlan": "Plan Actuel",
+    "active": "Actif",
+    "renewsOn": "Renouvelle le",
+    "planComparison": "Comparaison des Plans",
+    "manage": "Gerer l'Abonnement",
+    "upgrade": "Passer a Pro",
+    "upgradePrompt": "Passe a Pro pour debloquer providers, budgets et Radar temps reel illimites",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "perMonth": "EUR/mois",
+    "perYear": "EUR/an",
+    "currentPlanBadge": "Plan Actuel",
+    "recommended": "Recommande",
+    "savings": "economie",
+    "or": "ou",
+    "features": {
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "Historique",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Notifications push",
+      "prioritySupport": "Support prioritaire",
+      "exports": "Exports CSV/JSON",
+      "unlimited": "Illimite",
+      "viewOnly": "Lecture seule",
+      "realtime": "Temps reel",
+      "days": "jours"
+    },
+    "plan": {
+      "free": {
+        "name": "Free",
+        "description": "Pour les particuliers et petits projets",
+        "feature1": "1 provider connecte",
+        "feature2": "1 budget",
+        "feature3": "30 jours d'historique",
+        "feature4": "Acces au dashboard",
+        "feature5": "Alertes basiques"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Pour les equipes et charges de travail en production",
+        "feature1": "Providers illimites",
+        "feature2": "Budgets illimites",
+        "feature3": "Historique illimite",
+        "feature4": "Claude Code Radar (temps reel)",
+        "feature5": "Notifications push",
+        "feature6": "Support prioritaire",
+        "feature7": "Exports CSV/JSON"
+      }
+    },
+    "actions": {
+      "upgradeMonthly": "Passer a Mensuel (4,99 EUR/mois)",
+      "upgradeYearly": "Passer a Annuel (39,99 EUR/an)",
+      "manageSubscription": "Gerer l'Abonnement"
+    }
+  },
+  "limits": {
+    "reached": "Limite Atteinte",
+    "upgradeTo": "Passer a Pro",
+    "message": "Tu as {current}/{max} {feature} sur le plan Free."
+  },
+  "marketing": {
+    "hero": {
+      "badge": "En Beta",
+      "title": "Votre observatoire des",
+      "titleHighlight": "couts LLM",
+      "subtitle": "Suivez chaque euro depense en inference LLM en temps reel sur tous vos providers. Visualisez Claude Code de l'interieur.",
+      "cta": "S'inscrire — Gratuit a vie",
+      "ctaSecondary": "En savoir plus",
+      "trustBadge": "Sans CB · Agent open source · SOC 2 en cours"
+    },
+    "features": {
+      "sectionLabel": "// Fonctionnalites",
+      "heading": "Concu comme un cockpit. Pas comme un dashboard.",
+      "multiProvider": {
+        "label": "Multi-Provider",
+        "title": "Tous vos providers, une seule vue",
+        "description": "Anthropic, OpenAI, Groq, Mistral, xAI. Suivez l'usage, les tokens, la latence et le cout en temps reel sur tous vos providers LLM."
+      },
+      "radar": {
+        "label": "Claude Code Radar",
+        "title": "Trace d'agent temps reel",
+        "description": "Visualisez l'agent principal, les sub-agents, les fichiers consultes, les outils appeles. Fenetre de contexte affichee comme une jauge de carburant."
+      },
+      "budgets": {
+        "label": "Budgets & Alertes",
+        "title": "Definissez des limites, restez en securite",
+        "description": "Definissez des budgets par provider, modele ou workflow. Recevez des alertes aux seuils 75/90/100% par email, Slack ou webhook."
+      },
+      "mobile": {
+        "label": "Acces Partout",
+        "title": "Desktop + PWA Mobile",
+        "description": "Cockpit complet sur desktop, alertes sur mobile. Installez en PWA, fonctionne hors ligne, notifications push natives."
+      }
+    },
+    "pricingTeaser": {
+      "label": "// Tarifs",
+      "heading": "Commencez gratuit. Passez a Pro quand vous etes pret.",
+      "description": "Le plan gratuit inclut 1 provider, 1 budget et 30 jours d'historique. Pro deverrouille tout pour 4,99 EUR/mois.",
+      "cta": "Voir Tous les Tarifs"
+    },
+    "finalCta": {
+      "heading": "Pret a suivre vos couts LLM ?",
+      "description": "Inscription en 30 secondes. Sans carte bancaire.",
+      "cta": "Commencer Gratuitement"
+    },
+    "header": {
+      "features": "Fonctionnalites",
+      "pricing": "Tarifs",
+      "docs": "Docs",
+      "signin": "Connexion",
+      "signup": "Inscription"
+    },
+    "footer": {
+      "tagline": "Plateforme d'observabilite des couts LLM. Concu en France, opere en Europe.",
+      "product": "Produit",
+      "legal": "Legal",
+      "connect": "Contact",
+      "features": "Fonctionnalites",
+      "pricing": "Tarifs",
+      "docs": "Documentation",
+      "terms": "Conditions d'Utilisation",
+      "privacy": "Politique de Confidentialite",
+      "cookies": "Politique des Cookies",
+      "github": "GitHub",
+      "contact": "Contact",
+      "rights": "Tous droits reserves"
+    }
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "subtitle": "Tarifs simples et transparents. Commencez gratuit, passez a Pro quand vous en avez besoin.",
+    "sectionLabel": "// Tarifs",
+    "heading": "Tarifs simples et transparents",
+    "description": "Commencez gratuit. Passez a Pro quand vous avez besoin de providers illimites et de fonctionnalites temps reel.",
+    "free": {
+      "name": "Free",
+      "price": "0",
+      "period": "EUR / mois",
+      "description": "Pour particuliers et petits projets",
+      "cta": "Commencer Gratuitement"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "4,99",
+      "period": "EUR / mois",
+      "yearlyPrice": "39,99 EUR/an",
+      "yearlySavings": "~20% d'economie",
+      "description": "Pour equipes et production",
+      "cta": "Passer a Pro",
+      "recommended": "Recommande"
+    },
+    "comparison": {
+      "title": "Comparaison des Fonctionnalites",
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "Historique",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Notifications push",
+      "prioritySupport": "Support prioritaire",
+      "exports": "Exports CSV/JSON",
+      "unlimited": "Illimite",
+      "viewOnly": "Lecture seule",
+      "realtime": "Temps reel",
+      "days": "jours"
+    }
   }
 }

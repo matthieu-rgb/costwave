@@ -225,5 +225,175 @@
       "enable": "Aktivieren",
       "dismiss": "Nicht jetzt"
     }
+  },
+  "billing": {
+    "title": "Abrechnung",
+    "subtitle": "Verwalte Dein Abonnement und Deinen Plan",
+    "currentPlan": "Aktueller Plan",
+    "active": "Aktiv",
+    "renewsOn": "Verlangert am",
+    "planComparison": "Plan-Vergleich",
+    "manage": "Abonnement Verwalten",
+    "upgrade": "Auf Pro Upgraden",
+    "upgradePrompt": "Upgrade auf Pro fur unbegrenzte Providers, Budgets und Echtzeit-Radar",
+    "monthly": "Monatlich",
+    "yearly": "Jahrlich",
+    "perMonth": "EUR/Monat",
+    "perYear": "EUR/Jahr",
+    "currentPlanBadge": "Aktueller Plan",
+    "recommended": "Empfohlen",
+    "savings": "Ersparnis",
+    "or": "oder",
+    "features": {
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "Verlauf",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Push-Benachrichtigungen",
+      "prioritySupport": "Prioritats-Support",
+      "exports": "CSV/JSON-Exporte",
+      "unlimited": "Unbegrenzt",
+      "viewOnly": "Nur Ansicht",
+      "realtime": "Echtzeit",
+      "days": "Tage"
+    },
+    "plan": {
+      "free": {
+        "name": "Free",
+        "description": "Fur Einzelpersonen und kleine Projekte",
+        "feature1": "1 Provider verbunden",
+        "feature2": "1 Budget",
+        "feature3": "30 Tage Verlauf",
+        "feature4": "Dashboard-Zugang",
+        "feature5": "Basis-Warnungen"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Fur Teams und Produktions-Workloads",
+        "feature1": "Unbegrenzte Providers",
+        "feature2": "Unbegrenzte Budgets",
+        "feature3": "Unbegrenzter Verlauf",
+        "feature4": "Claude Code Radar (Echtzeit)",
+        "feature5": "Push-Benachrichtigungen",
+        "feature6": "Prioritats-Support",
+        "feature7": "CSV/JSON-Exporte"
+      }
+    },
+    "actions": {
+      "upgradeMonthly": "Monatlich Upgraden (4,99 EUR/Monat)",
+      "upgradeYearly": "Jahrlich Upgraden (39,99 EUR/Jahr)",
+      "manageSubscription": "Abonnement Verwalten"
+    }
+  },
+  "limits": {
+    "reached": "Limit Erreicht",
+    "upgradeTo": "Auf Pro Upgraden",
+    "message": "Du hast {current}/{max} {feature} im Free-Plan."
+  },
+  "marketing": {
+    "hero": {
+      "badge": "Jetzt in Beta",
+      "title": "Ihr LLM-Kosten-",
+      "titleHighlight": "Observatorium",
+      "subtitle": "Verfolgen Sie jeden Euro, der fur LLM-Inferenz ausgegeben wird, in Echtzeit uber alle Ihre Provider. Sehen Sie Claude Code von innen arbeiten.",
+      "cta": "Registrieren — Fur immer kostenlos",
+      "ctaSecondary": "Mehr erfahren",
+      "trustBadge": "Keine Kreditkarte · Open-Source-Agent · SOC 2 in Vorbereitung"
+    },
+    "features": {
+      "sectionLabel": "// Features",
+      "heading": "Gebaut wie ein Cockpit. Nicht wie ein Dashboard.",
+      "multiProvider": {
+        "label": "Multi-Provider",
+        "title": "Alle Provider, eine Ansicht",
+        "description": "Anthropic, OpenAI, Groq, Mistral, xAI. Verfolgen Sie Nutzung, Tokens, Latenz und Kosten in Echtzeit uber alle Ihre LLM-Provider."
+      },
+      "radar": {
+        "label": "Claude Code Radar",
+        "title": "Echtzeit-Agent-Trace",
+        "description": "Visualisieren Sie den Haupt-Agent, Sub-Agents, aufgerufene Dateien und genutzte Tools. Kontextfenster-Nutzung wie eine Kraftstoffanzeige."
+      },
+      "budgets": {
+        "label": "Budgets & Warnungen",
+        "title": "Grenzen setzen, sicher bleiben",
+        "description": "Definieren Sie Budgets nach Provider, Modell oder Workflow. Erhalten Sie Warnungen bei 75/90/100% Schwellenwerten per E-Mail, Slack oder Webhook."
+      },
+      "mobile": {
+        "label": "Uberall Zugriff",
+        "title": "Desktop + Mobile PWA",
+        "description": "Vollstandiges Cockpit auf Desktop, Warnungen auf Mobilgerat. Als PWA installierbar, funktioniert offline, native Push-Benachrichtigungen."
+      }
+    },
+    "pricingTeaser": {
+      "label": "// Preise",
+      "heading": "Kostenlos starten. Upgraden, wenn Sie bereit sind.",
+      "description": "Der kostenlose Plan beinhaltet 1 Provider, 1 Budget und 30 Tage Verlauf. Pro schaltet alles frei fur 4,99 EUR/Monat.",
+      "cta": "Alle Preise Ansehen"
+    },
+    "finalCta": {
+      "heading": "Bereit, Ihre LLM-Kosten zu verfolgen?",
+      "description": "Registrierung in 30 Sekunden. Keine Kreditkarte erforderlich.",
+      "cta": "Kostenlos Starten"
+    },
+    "header": {
+      "features": "Features",
+      "pricing": "Preise",
+      "docs": "Docs",
+      "signin": "Anmelden",
+      "signup": "Registrieren"
+    },
+    "footer": {
+      "tagline": "LLM-Kosten-Observabilitatsplattform. In Frankreich entwickelt, in Europa betrieben.",
+      "product": "Produkt",
+      "legal": "Rechtliches",
+      "connect": "Verbinden",
+      "features": "Features",
+      "pricing": "Preise",
+      "docs": "Dokumentation",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklarung",
+      "cookies": "Cookie-Richtlinie",
+      "github": "GitHub",
+      "contact": "Kontakt",
+      "rights": "Alle Rechte vorbehalten"
+    }
+  },
+  "pricing": {
+    "title": "Preise",
+    "subtitle": "Einfache, transparente Preise. Kostenlos starten, upgraden wenn Sie mehr brauchen.",
+    "sectionLabel": "// Preise",
+    "heading": "Einfache, transparente Preise",
+    "description": "Kostenlos starten. Upgraden, wenn Sie unbegrenzte Provider und Echtzeit-Features benotigen.",
+    "free": {
+      "name": "Free",
+      "price": "0",
+      "period": "EUR / Monat",
+      "description": "Fur Einzelpersonen & kleine Projekte",
+      "cta": "Kostenlos Starten"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "4,99",
+      "period": "EUR / Monat",
+      "yearlyPrice": "39,99 EUR/Jahr",
+      "yearlySavings": "~20% Ersparnis",
+      "description": "Fur Teams & Produktions-Workloads",
+      "cta": "Auf Pro Upgraden",
+      "recommended": "Empfohlen"
+    },
+    "comparison": {
+      "title": "Feature-Vergleich",
+      "providers": "Providers",
+      "budgets": "Budgets",
+      "history": "Verlauf",
+      "radar": "Claude Code Radar",
+      "pushNotifications": "Push-Benachrichtigungen",
+      "prioritySupport": "Prioritats-Support",
+      "exports": "CSV/JSON-Exporte",
+      "unlimited": "Unbegrenzt",
+      "viewOnly": "Nur Ansicht",
+      "realtime": "Echtzeit",
+      "days": "Tage"
+    }
   }
 }
