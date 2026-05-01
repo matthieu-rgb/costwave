@@ -11,13 +11,19 @@ import { AddProviderDialog } from '@/components/app/AddProviderDialog';
 import { UpgradePrompt } from '@/components/app/UpgradePrompt';
 import { canAddProvider } from '@/lib/auth/feature-gate';
 
-export default async function ProvidersPage() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function ProvidersPage({ params }: PageProps) {
+  const { locale } = await params;
+
   const session = await auth.api.getSession({
     headers: await import('next/headers').then((m) => m.headers()),
   });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   const providers = await db.query.providerCredential.findMany({

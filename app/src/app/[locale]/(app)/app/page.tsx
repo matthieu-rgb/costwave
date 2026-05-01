@@ -7,13 +7,19 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
-export default async function DashboardPage() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function DashboardPage({ params }: PageProps) {
+  const { locale } = await params;
+
   const session = await auth.api.getSession({
     headers: await import('next/headers').then((m) => m.headers()),
   });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   // Get all user's providers

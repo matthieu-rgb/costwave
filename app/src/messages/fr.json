@@ -224,6 +224,24 @@
       "prompt": "Activer les notifications push pour les alertes budget ?",
       "enable": "Activer",
       "dismiss": "Pas maintenant"
+    },
+    "install": {
+      "title": "Installer Costwave",
+      "description": "Installez l'application pour un acces rapide et des notifications push.",
+      "install": "Installer",
+      "dismiss": "Pas maintenant",
+      "installed": "Application installee avec succes"
+    },
+    "offline": {
+      "title": "Mode hors ligne",
+      "message": "Vous etes hors ligne. Les donnees affichees peuvent etre obsoletes.",
+      "retrying": "Nouvelle tentative de connexion..."
+    },
+    "update": {
+      "title": "Mise a jour disponible",
+      "message": "Une nouvelle version de Costwave est disponible.",
+      "update": "Mettre a jour",
+      "dismiss": "Plus tard"
     }
   },
   "billing": {

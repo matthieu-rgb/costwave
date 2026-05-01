@@ -134,12 +134,18 @@ async function getScopeLabel(
   return scope;
 }
 
-export default async function BudgetsPage() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function BudgetsPage({ params }: PageProps) {
+  const { locale } = await params;
+
   const headersList = await headers();
   const session = await auth.api.getSession({ headers: headersList });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   // Query budgets

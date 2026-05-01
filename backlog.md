@@ -64,3 +64,10 @@ const salt = crypto
 - [ ] Les redirects auth hardcodent /en/login (devrait detecter le locale courant)
 - [ ] Helper redirectToLogin(locale) a creer
 - [ ] Update tous les redirect('/en/login') dans (app)/app/*/page.tsx
+
+## Pre-launch security hygiene (avant Phase 10)
+
+- [ ] Regenerer STRIPE_SECRET_KEY (clé test exposée dans commit local non pushé)
+- [ ] Regenerer RESEND_API_KEY (idem)
+- [ ] Verifier que .env.local n'est jamais committe (check git history)
+- [ ] Ajouter detection secrets pre-commit hook (git-secrets, gitleaks)

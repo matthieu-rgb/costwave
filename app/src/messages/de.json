@@ -224,6 +224,24 @@
       "prompt": "Push-Benachrichtigungen fur Budget-Warnungen aktivieren?",
       "enable": "Aktivieren",
       "dismiss": "Nicht jetzt"
+    },
+    "install": {
+      "title": "Costwave installieren",
+      "description": "Installieren Sie die App fur schnellen Zugriff und Push-Benachrichtigungen.",
+      "install": "Installieren",
+      "dismiss": "Nicht jetzt",
+      "installed": "App erfolgreich installiert"
+    },
+    "offline": {
+      "title": "Offline-Modus",
+      "message": "Sie sind offline. Die angezeigten Daten konnen veraltet sein.",
+      "retrying": "Verbindung wird erneut versucht..."
+    },
+    "update": {
+      "title": "Update verfugbar",
+      "message": "Eine neue Version von Costwave ist verfugbar.",
+      "update": "Aktualisieren",
+      "dismiss": "Spater"
     }
   },
   "billing": {

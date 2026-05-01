@@ -1,7 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { headers } from 'next/headers';
+import { headers, cookies } from 'next/headers';
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { subscription, auditLog, user } from '@/lib/db/schema';
@@ -119,7 +119,11 @@ export async function createCheckoutSession(
     }
 
     // Create Checkout session
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+    const appUrl = `${baseUrl}/${locale}`;
+
     const checkoutSession = await stripe.checkout.sessions.create({
       customer: customerId,
       mode: 'subscription',
@@ -130,8 +134,8 @@ export async function createCheckoutSession(
           quantity: 1,
         },
       ],
-      success_url: `${appUrl}/billing?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${appUrl}/billing?canceled=true`,
+      success_url: `${appUrl}/app/billing?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/app/billing?canceled=true`,
       allow_promotion_codes: true,
       metadata: {
         userId,
@@ -196,10 +200,14 @@ export async function createPortalSession(): Promise<ActionResult> {
     }
 
     // Create portal session
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+    const cookieStore = await cookies();
+    const locale = cookieStore.get('NEXT_LOCALE')?.value || 'en';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001';
+    const appUrl = `${baseUrl}/${locale}`;
+
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: userSubscription.stripeCustomerId,
-      return_url: `${appUrl}/billing`,
+      return_url: `${appUrl}/app/billing`,
     });
 
     await logAudit({

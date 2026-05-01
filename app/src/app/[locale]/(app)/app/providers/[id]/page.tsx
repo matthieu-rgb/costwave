@@ -8,18 +8,18 @@ import { Badge } from '@/components/ui/badge';
 import { ProviderActions } from '@/components/app/ProviderActions';
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: string; id: string }>;
 }
 
 export default async function ProviderDetailPage({ params }: PageProps) {
-  const { id } = await params;
+  const { locale, id } = await params;
 
   const session = await auth.api.getSession({
     headers: await import('next/headers').then((m) => m.headers()),
   });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   const provider = await db.query.providerCredential.findFirst({

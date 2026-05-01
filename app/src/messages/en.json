@@ -224,6 +224,24 @@
       "prompt": "Enable push notifications for budget alerts?",
       "enable": "Enable",
       "dismiss": "Not now"
+    },
+    "install": {
+      "title": "Install Costwave",
+      "description": "Install the app for quick access and push notifications.",
+      "install": "Install",
+      "dismiss": "Not now",
+      "installed": "App installed successfully"
+    },
+    "offline": {
+      "title": "Offline mode",
+      "message": "You are offline. Displayed data may be outdated.",
+      "retrying": "Retrying connection..."
+    },
+    "update": {
+      "title": "Update available",
+      "message": "A new version of Costwave is available.",
+      "update": "Update",
+      "dismiss": "Later"
     }
   },
   "billing": {

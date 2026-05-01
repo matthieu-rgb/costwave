@@ -16,7 +16,13 @@ export const metadata = {
   description: 'Manage your subscription and billing',
 };
 
-export default async function BillingPage() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function BillingPage({ params }: PageProps) {
+  const { locale } = await params;
+
   // Auth check
   const headersList = await headers();
   const session = await auth.api.getSession({
@@ -24,7 +30,7 @@ export default async function BillingPage() {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   const userId = session.user.id;

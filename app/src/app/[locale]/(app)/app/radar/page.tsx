@@ -2,13 +2,19 @@ import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { RadarView } from '@/components/app/RadarView';
 
-export default async function RadarPage() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function RadarPage({ params }: PageProps) {
+  const { locale } = await params;
+
   const session = await auth.api.getSession({
     headers: await import('next/headers').then((m) => m.headers()),
   });
 
   if (!session?.user?.id) {
-    redirect('/en/login');
+    redirect(`/${locale}/login`);
   }
 
   return (
