@@ -153,5 +153,77 @@
       "web": "Web"
     },
     "terminal": "Horche auf Events..."
+  },
+  "budgets": {
+    "title": "Budgets",
+    "breadcrumb": "Mission Control / Budgets",
+    "noBudgets": "Keine Budgets konfiguriert",
+    "createBudget": "Neues Budget",
+    "health": "Budget-Gesundheit",
+    "spendTotal": "Ausgaben / Gesamt",
+    "breachCritWarn": "Uberschreitung / Kritisch / Warnung",
+    "nominal": "Nominal",
+    "warn": "Warnung",
+    "crit": "Kritisch",
+    "breach": "Uberschreitung - Budget uberschritten",
+    "scope": "Bereich",
+    "scopeGlobal": "Alle Provider",
+    "scopeProvider": "Provider",
+    "scopeWorkflow": "Workflow",
+    "period": "Zeitraum",
+    "periodDay": "Taglich",
+    "periodWeek": "Wochentlich",
+    "periodMonth": "Monatlich",
+    "amount": "Limit (USD)",
+    "thresholds": "Warn-Schwellenwerte",
+    "consumed": "Verbraucht",
+    "dialog": {
+      "title": "Budget Erstellen",
+      "name": "Name",
+      "namePlaceholder": "z.B. Monatliches Globales Budget",
+      "selectScope": "Bereich auswahlen",
+      "selectPeriod": "Zeitraum auswahlen",
+      "selectTarget": "Ziel auswahlen",
+      "create": "Budget Erstellen",
+      "update": "Budget Aktualisieren",
+      "cancel": "Abbrechen"
+    },
+    "delete": {
+      "title": "Budget Loschen",
+      "confirm": "Diese Aktion loscht dieses Budget und alle zugehorigen Warnungen dauerhaft. Diese Aktion kann nicht ruckgangig gemacht werden.",
+      "action": "Budget Loschen"
+    },
+    "success": {
+      "created": "Budget erfolgreich erstellt",
+      "updated": "Budget erfolgreich aktualisiert",
+      "deleted": "Budget erfolgreich gelöscht"
+    },
+    "errors": {
+      "createFailed": "Budget konnte nicht erstellt werden. Bitte versuche es erneut.",
+      "updateFailed": "Budget konnte nicht aktualisiert werden. Bitte versuche es erneut.",
+      "deleteFailed": "Budget konnte nicht geloscht werden. Bitte versuche es erneut."
+    }
+  },
+  "email": {
+    "budgetAlert": {
+      "subject": "Budget-Warnung: {threshold}% erreicht",
+      "title": "Budget-Schwelle Erreicht",
+      "body": "Dein Budget {budgetName} hat {threshold}% erreicht.",
+      "details": "Verwendet: ${usedAmount} / ${maxAmount}",
+      "period": "Zeitraum: {period}",
+      "action": "Budget Ansehen",
+      "footer": "Du hast diese Benachrichtigung erhalten, weil Du Budget-Warnungen in Costwave konfiguriert hast."
+    }
+  },
+  "push": {
+    "budgetAlert": {
+      "title": "Budget-Warnung: {threshold}%",
+      "body": "{budgetName}: ${used} / ${max}"
+    },
+    "subscribe": {
+      "prompt": "Push-Benachrichtigungen fur Budget-Warnungen aktivieren?",
+      "enable": "Aktivieren",
+      "dismiss": "Nicht jetzt"
+    }
   }
 }

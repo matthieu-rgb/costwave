@@ -153,5 +153,77 @@
       "web": "Web"
     },
     "terminal": "En ecoute..."
+  },
+  "budgets": {
+    "title": "Budgets",
+    "breadcrumb": "Mission Control / Budgets",
+    "noBudgets": "Aucun budget configure",
+    "createBudget": "Nouveau Budget",
+    "health": "Sante des Budgets",
+    "spendTotal": "Depense / Total",
+    "breachCritWarn": "Depassement / Critique / Alerte",
+    "nominal": "Nominal",
+    "warn": "Alerte",
+    "crit": "Critique",
+    "breach": "Depassement - Budget depasse",
+    "scope": "Perimetre",
+    "scopeGlobal": "Tous les Providers",
+    "scopeProvider": "Provider",
+    "scopeWorkflow": "Workflow",
+    "period": "Periode",
+    "periodDay": "Quotidien",
+    "periodWeek": "Hebdomadaire",
+    "periodMonth": "Mensuel",
+    "amount": "Limite (USD)",
+    "thresholds": "Seuils d'Alerte",
+    "consumed": "Consomme",
+    "dialog": {
+      "title": "Creer un Budget",
+      "name": "Nom",
+      "namePlaceholder": "ex: Budget Mensuel Global",
+      "selectScope": "Selectionne un perimetre",
+      "selectPeriod": "Selectionne une periode",
+      "selectTarget": "Selectionne une cible",
+      "create": "Creer le Budget",
+      "update": "Mettre a Jour le Budget",
+      "cancel": "Annuler"
+    },
+    "delete": {
+      "title": "Supprimer le Budget",
+      "confirm": "Cette action supprimera definitivement ce budget et toutes les alertes associees. Cette action est irreversible.",
+      "action": "Supprimer le Budget"
+    },
+    "success": {
+      "created": "Budget cree avec succes",
+      "updated": "Budget mis a jour avec succes",
+      "deleted": "Budget supprime avec succes"
+    },
+    "errors": {
+      "createFailed": "Echec de la creation du budget. Reessaie.",
+      "updateFailed": "Echec de la mise a jour du budget. Reessaie.",
+      "deleteFailed": "Echec de la suppression du budget. Reessaie."
+    }
+  },
+  "email": {
+    "budgetAlert": {
+      "subject": "Alerte Budget: {threshold}% atteint",
+      "title": "Seuil de Budget Atteint",
+      "body": "Ton budget {budgetName} a atteint {threshold}%.",
+      "details": "Utilise: ${usedAmount} / ${maxAmount}",
+      "period": "Periode: {period}",
+      "action": "Voir le Budget",
+      "footer": "Tu as recu cette alerte car tu as configure des alertes de budget dans Costwave."
+    }
+  },
+  "push": {
+    "budgetAlert": {
+      "title": "Alerte Budget: {threshold}%",
+      "body": "{budgetName}: ${used} / ${max}"
+    },
+    "subscribe": {
+      "prompt": "Activer les notifications push pour les alertes budget ?",
+      "enable": "Activer",
+      "dismiss": "Pas maintenant"
+    }
   }
 }
