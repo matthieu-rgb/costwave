@@ -19,7 +19,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { syncProvider, removeProvider } from '@/app/[locale]/(app)/actions/providers';
+import { syncProvider, removeProvider } from '@/app/[locale]/(app)/app/actions/providers';
 import { toast } from 'sonner';
 
 interface ProviderActionsProps {

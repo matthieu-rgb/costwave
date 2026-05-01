@@ -24,7 +24,7 @@ export default async function BillingPage() {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   const userId = session.user.id;

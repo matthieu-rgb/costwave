@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createBudget } from '@/app/[locale]/(app)/budgets/actions';
+import { createBudget } from '@/app/[locale]/(app)/app/budgets/actions';
 
 interface Provider {
   id: string;
@@ -94,7 +94,7 @@ export function CreateBudgetDialog({ providers = [], workflows = [] }: CreateBud
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger>
         <Button className="gap-2 rounded-sm border-[hsl(var(--mc-text))] bg-[hsl(var(--mc-text))] px-3.5 py-2 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-[hsl(var(--mc-bg))] hover:bg-[hsl(var(--mc-text))]">
           <Plus className="h-3 w-3" />
           NEW.BUDGET
@@ -171,7 +171,7 @@ export function CreateBudgetDialog({ providers = [], workflows = [] }: CreateBud
               <Label className="font-mono text-[9px] uppercase tracking-wide text-[hsl(var(--mc-text-mute))]">
                 TARGET
               </Label>
-              <Select value={targetId} onValueChange={setTargetId} required>
+              <Select value={targetId} onValueChange={(val) => setTargetId(val || '')} required>
                 <SelectTrigger className="h-8 rounded-sm border-[hsl(var(--mc-border))] bg-[hsl(var(--mc-bg))] font-mono text-[11px]">
                   <SelectValue placeholder="Select target..." />
                 </SelectTrigger>

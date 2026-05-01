@@ -25,7 +25,7 @@ export default function SignupPage() {
         password,
         name,
       });
-      router.push('/');
+      router.push('/app');
     } catch (error) {
       console.error('Signup failed:', error);
     } finally {

@@ -10,13 +10,9 @@ import { canAddBudget } from '@/lib/auth/feature-gate';
 
 const CreateBudgetSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100, 'Name too long'),
-  scope: z.enum(['global', 'provider', 'workflow'], {
-    errorMap: () => ({ message: 'Invalid scope' }),
-  }),
+  scope: z.enum(['global', 'provider', 'workflow']),
   targetId: z.string().uuid().optional(),
-  period: z.enum(['day', 'week', 'month'], {
-    errorMap: () => ({ message: 'Invalid period' }),
-  }),
+  period: z.enum(['day', 'week', 'month']),
   amountUsd: z.number().positive('Amount must be positive'),
   alertThresholds: z
     .array(z.number().int().min(1).max(100))

@@ -22,12 +22,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { deleteBudget } from '@/app/[locale]/(app)/budgets/actions';
+import { deleteBudget } from '@/app/[locale]/(app)/app/budgets/actions';
 
 interface BudgetCardProps {
   budget: {
     id: string;
-    name: string;
+    name?: string;
     scope: string;
     targetId: string | null;
     period: string;
@@ -88,7 +88,7 @@ export function BudgetCard({ budget, usedAmount, scopeLabel }: BudgetCardProps) 
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="font-mono text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--mc-text))]">
-              {budget.name}
+              {budget.name || scopeLabel || budget.scope}
             </div>
             <div className="mt-1 font-mono text-[9px] uppercase tracking-wide text-[hsl(var(--mc-text-mute))]">
               // {scopeLabel || budget.scope}

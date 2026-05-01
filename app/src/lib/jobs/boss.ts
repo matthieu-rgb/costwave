@@ -1,4 +1,4 @@
-import PgBoss from 'pg-boss';
+import { PgBoss } from 'pg-boss';
 
 let boss: PgBoss | null = null;
 
@@ -8,14 +8,7 @@ export async function ensureBossReady(): Promise<PgBoss> {
   }
 
   if (!boss) {
-    boss = new PgBoss({
-      connectionString: process.env.DATABASE_URL,
-      retryLimit: 3,
-      retryDelay: 1000,
-      expireInHours: 24,
-      retentionHours: 48,
-      deleteAfterHours: 72,
-    });
+    boss = new PgBoss(process.env.DATABASE_URL);
 
     boss.on('error', (error: Error) => {
       console.error('[pg-boss] Error:', error.message);

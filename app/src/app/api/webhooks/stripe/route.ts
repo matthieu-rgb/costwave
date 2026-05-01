@@ -24,7 +24,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { stripe } from '@/lib/stripe/client';
 import { db } from '@/lib/db';
-import { subscription, auditLog, user } from '@/lib/db/schema';
+import { subscription as subscriptionTable, auditLog, user } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import Stripe from 'stripe';
 import { sendUpgradeWelcomeEmail } from '@/lib/email/send-upgrade-welcome';
@@ -57,9 +57,16 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   const customerId = subscription.customer as string;
   const subscriptionId = subscription.id;
 
-  // Get user by Stripe customer ID
+  // Fetch customer to get email
+  const customer = await stripe.customers.retrieve(customerId);
+  if (customer.deleted) {
+    console.error(`Customer ${customerId} was deleted`);
+    return;
+  }
+
+  // Get user by Stripe customer email
   const existingUser = await db.query.user.findFirst({
-    where: eq(user.email, subscription.customer_email || ''),
+    where: eq(user.email, customer.email || ''),
   });
 
   if (!existingUser) {
@@ -69,7 +76,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
 
   // Check if subscription already exists
   const existingSubscription = await db.query.subscription.findFirst({
-    where: eq(subscription.userId, existingUser.id),
+    where: eq(subscriptionTable.userId, existingUser.id),
   });
 
   const subscriptionData = {
@@ -78,20 +85,20 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     stripeSubscriptionId: subscriptionId,
     plan: 'pro' as const,
     status: subscription.status,
-    currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+    currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
   };
 
   if (existingSubscription) {
     // Update existing
-    await db.update(subscription)
+    await db.update(subscriptionTable)
       .set({
         ...subscriptionData,
         updatedAt: new Date(),
       })
-      .where(eq(subscription.id, existingSubscription.id));
+      .where(eq(subscriptionTable.id, existingSubscription.id));
   } else {
     // Insert new
-    await db.insert(subscription).values(subscriptionData);
+    await db.insert(subscriptionTable).values(subscriptionData);
   }
 
   await logAudit({
@@ -108,9 +115,9 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   // Send welcome email
   const billingPeriod = subscription.items.data[0]?.price.recurring?.interval;
   const planType = billingPeriod === 'year' ? 'yearly' : 'monthly';
-  if (subscription.customer_email) {
+  if (customer.email) {
     await sendUpgradeWelcomeEmail(
-      subscription.customer_email,
+      customer.email,
       existingUser.name || 'there',
       planType
     );
@@ -123,7 +130,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const subscriptionId = subscription.id;
 
   const existingSubscription = await db.query.subscription.findFirst({
-    where: eq(subscription.stripeSubscriptionId, subscriptionId),
+    where: eq(subscriptionTable.stripeSubscriptionId, subscriptionId),
   });
 
   if (!existingSubscription) {
@@ -131,13 +138,13 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     return;
   }
 
-  await db.update(subscription)
+  await db.update(subscriptionTable)
     .set({
       status: subscription.status,
-      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
       updatedAt: new Date(),
     })
-    .where(eq(subscription.stripeSubscriptionId, subscriptionId));
+    .where(eq(subscriptionTable.stripeSubscriptionId, subscriptionId));
 
   await logAudit({
     userId: existingSubscription.userId,
@@ -156,7 +163,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   const subscriptionId = subscription.id;
 
   const existingSubscription = await db.query.subscription.findFirst({
-    where: eq(subscription.stripeSubscriptionId, subscriptionId),
+    where: eq(subscriptionTable.stripeSubscriptionId, subscriptionId),
   });
 
   if (!existingSubscription) {
@@ -164,12 +171,12 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
     return;
   }
 
-  await db.update(subscription)
+  await db.update(subscriptionTable)
     .set({
       status: 'canceled',
       updatedAt: new Date(),
     })
-    .where(eq(subscription.stripeSubscriptionId, subscriptionId));
+    .where(eq(subscriptionTable.stripeSubscriptionId, subscriptionId));
 
   await logAudit({
     userId: existingSubscription.userId,
@@ -185,12 +192,12 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 }
 
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return;
+  if (!(invoice as any).subscription) return;
 
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
 
   const existingSubscription = await db.query.subscription.findFirst({
-    where: eq(subscription.stripeSubscriptionId, subscriptionId),
+    where: eq(subscriptionTable.stripeSubscriptionId, subscriptionId),
   });
 
   if (!existingSubscription) {
@@ -199,12 +206,12 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
   }
 
   // Ensure subscription is marked as active
-  await db.update(subscription)
+  await db.update(subscriptionTable)
     .set({
       status: 'active',
       updatedAt: new Date(),
     })
-    .where(eq(subscription.stripeSubscriptionId, subscriptionId));
+    .where(eq(subscriptionTable.stripeSubscriptionId, subscriptionId));
 
   await logAudit({
     userId: existingSubscription.userId,
@@ -221,12 +228,12 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  if (!invoice.subscription) return;
+  if (!(invoice as any).subscription) return;
 
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
 
   const existingSubscription = await db.query.subscription.findFirst({
-    where: eq(subscription.stripeSubscriptionId, subscriptionId),
+    where: eq(subscriptionTable.stripeSubscriptionId, subscriptionId),
   });
 
   if (!existingSubscription) {
@@ -234,12 +241,12 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
     return;
   }
 
-  await db.update(subscription)
+  await db.update(subscriptionTable)
     .set({
       status: 'past_due',
       updatedAt: new Date(),
     })
-    .where(eq(subscription.stripeSubscriptionId, subscriptionId));
+    .where(eq(subscriptionTable.stripeSubscriptionId, subscriptionId));
 
   await logAudit({
     userId: existingSubscription.userId,

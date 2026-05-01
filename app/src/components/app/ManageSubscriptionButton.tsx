@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { createPortalSession } from '@/app/[locale]/(app)/billing/actions';
+import { createPortalSession } from '@/app/[locale]/(app)/app/billing/actions';
 import { toast } from 'sonner';
 
 export function ManageSubscriptionButton() {

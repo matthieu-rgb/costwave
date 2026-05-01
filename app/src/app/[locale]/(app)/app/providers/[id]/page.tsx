@@ -19,7 +19,7 @@ export default async function ProviderDetailPage({ params }: PageProps) {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   const provider = await db.query.providerCredential.findFirst({

@@ -1,4 +1,4 @@
-import type PgBoss from 'pg-boss';
+import type { PgBoss } from 'pg-boss';
 import { db } from '@/lib/db';
 import { budget, budgetAlertSent, providerUsageSnapshot, event, user } from '@/lib/db/schema';
 import { eq, and, gte, lte, sql } from 'drizzle-orm';
@@ -160,7 +160,7 @@ async function checkSingleBudget(budget: BudgetCheck, now: Date): Promise<void> 
           // Send email
           if (userData.email) {
             await sendBudgetAlertEmail(userData.email, {
-              budgetName: budget.name,
+              budgetName: (budget as any).name || `${budget.scope} budget`,
               threshold,
               usedAmount,
               maxAmount,
@@ -173,7 +173,7 @@ async function checkSingleBudget(budget: BudgetCheck, now: Date): Promise<void> 
           // Send push notification
           await sendPushToUser(budget.userId, {
             title: `Budget Alert: ${threshold}% reached`,
-            body: `${budget.name}: $${usedAmount.toFixed(2)} / $${maxAmount.toFixed(2)}`,
+            body: `${(budget as any).name || `${budget.scope} budget`}: $${usedAmount.toFixed(2)} / $${maxAmount.toFixed(2)}`,
             icon: '/icons/icon-192.png',
             url: `/${userData.locale || 'en'}/budgets`,
           });

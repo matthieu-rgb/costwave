@@ -17,7 +17,7 @@ export default async function ProvidersPage() {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   const providers = await db.query.providerCredential.findMany({

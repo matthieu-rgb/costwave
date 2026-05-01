@@ -69,7 +69,7 @@ export async function createCheckoutSession(
     if (!validation.success) {
       return {
         success: false,
-        error: validation.error.errors[0]?.message || 'Invalid input',
+        error: validation.error.issues[0]?.message || 'Invalid input',
       };
     }
 

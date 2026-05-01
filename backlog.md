@@ -50,3 +50,17 @@ const salt = crypto
 - Review and address during Phase 4 or during dedicated security hardening sprint
 - Consider implementing #1 and #2 before public launch
 - #3 is purely cosmetic (both 16 and 32 bytes are cryptographically secure)
+
+## Dette Phase 5 / refactor routes
+
+- [ ] Ajouter colonne `name` (text not null) a la table `budget` + migration Drizzle
+- [ ] Le BudgetCard utilise actuellement un fallback ('Budget') car la colonne n'existe pas
+- [ ] Update CreateBudgetDialog pour permettre la saisie d'un name
+- [ ] Update server actions create/update pour persister le name
+- [ ] V1.5 priority: medium
+
+## Locale-aware redirects (V1.5)
+
+- [ ] Les redirects auth hardcodent /en/login (devrait detecter le locale courant)
+- [ ] Helper redirectToLogin(locale) a creer
+- [ ] Update tous les redirect('/en/login') dans (app)/app/*/page.tsx

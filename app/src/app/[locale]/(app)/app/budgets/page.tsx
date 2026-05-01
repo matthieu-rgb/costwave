@@ -11,7 +11,7 @@ import { MCBadge } from '@/components/app/MCBadge';
 
 interface BudgetWithUsage {
   id: string;
-  name: string;
+  name?: string;
   scope: string;
   targetId: string | null;
   period: string;
@@ -139,7 +139,7 @@ export default async function BudgetsPage() {
   const session = await auth.api.getSession({ headers: headersList });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   // Query budgets

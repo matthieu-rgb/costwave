@@ -35,3 +35,8 @@ __pycache__/
 # Generated
 app/public/docs/
 app/public/locales/
+
+# Backup files
+*.backup
+*.bak
+.env.backup

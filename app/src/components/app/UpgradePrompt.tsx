@@ -22,7 +22,7 @@ export function UpgradePrompt({ feature, currentCount, maxAllowed }: UpgradeProm
         </span>{' '}
         {feature} on the Free plan.{' '}
         <Link
-          href="/billing"
+          href="/app/billing"
           className="text-[hsl(var(--color-phosphor))] hover:underline inline-flex items-center gap-1"
         >
           Upgrade to Pro →

@@ -8,7 +8,7 @@ export default async function RadarPage() {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   return (

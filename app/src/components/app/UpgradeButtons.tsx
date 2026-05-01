@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { createCheckoutSession } from '@/app/[locale]/(app)/billing/actions';
+import { createCheckoutSession } from '@/app/[locale]/(app)/app/billing/actions';
 import { STRIPE_PRICE_PRO_MONTHLY, STRIPE_PRICE_PRO_YEARLY } from '@/lib/stripe/config';
 import { toast } from 'sonner';
 

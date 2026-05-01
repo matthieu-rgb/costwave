@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   });
 
   if (!session?.user?.id) {
-    redirect('/en/signin');
+    redirect('/en/login');
   }
 
   // Get all user's providers
@@ -249,7 +249,7 @@ export default async function DashboardPage() {
             <div className="font-mono text-sm text-[hsl(var(--mc-text-dim))]">
               No providers configured. Add a provider to get started.
             </div>
-            <Link href="/providers">
+            <Link href="/app/providers">
               <button className="rounded-sm border-[hsl(var(--mc-phosphor))] bg-[hsl(var(--mc-phosphor))] px-4 py-2 font-mono text-xs text-white hover:bg-[hsl(var(--mc-phosphor))]/90">
                 ADD PROVIDER
               </button>

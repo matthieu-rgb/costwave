@@ -30,7 +30,7 @@ if (!STRIPE_SECRET_KEY) {
 }
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2026-04-22.dahlia',
   typescript: true,
 });
 

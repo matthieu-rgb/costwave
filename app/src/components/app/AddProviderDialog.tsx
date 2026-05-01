@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { addProvider } from '@/app/[locale]/(app)/actions/providers';
+import { addProvider } from '@/app/[locale]/(app)/app/actions/providers';
 import type { ProviderType } from '@/lib/providers/types';
 import { toast } from 'sonner';
 

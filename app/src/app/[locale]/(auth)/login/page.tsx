@@ -23,7 +23,7 @@ export default function LoginPage() {
         email,
         password,
       });
-      router.push('/');
+      router.push('/app');
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
