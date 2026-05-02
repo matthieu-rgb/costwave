@@ -40,3 +40,5 @@ app/public/locales/
 *.backup
 *.bak
 .env.backup
+RESUME-DEMAIN.md
+.env.production
