@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { providerCredential, providerUsageSnapshot } from '@/lib/db/schema';
-import { eq, desc, inArray } from 'drizzle-orm';
+import { providerCredential, providerUsageSnapshot, event } from '@/lib/db/schema';
+import { eq, desc, inArray, sql, gte, and, lte } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -43,10 +43,37 @@ export default async function DashboardPage({ params }: PageProps) {
   const mtdSnapshots = allSnapshots.filter(
     (s) => s.periodStart >= monthStart
   );
-  const totalCostMTD = mtdSnapshots.reduce(
+  const snapshotCostMTD = mtdSnapshots.reduce(
     (sum, s) => sum + parseFloat(s.costUsd),
     0
   );
+
+  // Get MTD events (API ingest + workflows)
+  const eventsMTDResult = await db
+    .select({
+      totalCost: sql<string>`COALESCE(SUM(${event.costUsd}), 0)`,
+    })
+    .from(event)
+    .where(
+      and(
+        eq(event.userId, session.user.id),
+        gte(event.startedAt, monthStart)
+      )
+    );
+
+  const eventCostMTD = parseFloat(eventsMTDResult[0]?.totalCost || '0');
+
+  const totalCostMTD = snapshotCostMTD + eventCostMTD;
+
+  // Get total event requests (all time)
+  const eventsTotalResult = await db
+    .select({
+      totalRequests: sql<number>`COUNT(*)`,
+    })
+    .from(event)
+    .where(eq(event.userId, session.user.id));
+
+  const eventRequestsTotal = eventsTotalResult[0]?.totalRequests || 0;
 
   // Calculate previous month for evolution
   const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
@@ -54,10 +81,28 @@ export default async function DashboardPage({ params }: PageProps) {
   const lastMonthSnapshots = allSnapshots.filter(
     (s) => s.periodStart >= lastMonthStart && s.periodStart <= lastMonthEnd
   );
-  const totalCostLastMonth = lastMonthSnapshots.reduce(
+  const snapshotCostLastMonth = lastMonthSnapshots.reduce(
     (sum, s) => sum + parseFloat(s.costUsd),
     0
   );
+
+  // Get last month events
+  const eventsLastMonthResult = await db
+    .select({
+      totalCost: sql<string>`COALESCE(SUM(${event.costUsd}), 0)`,
+    })
+    .from(event)
+    .where(
+      and(
+        eq(event.userId, session.user.id),
+        gte(event.startedAt, lastMonthStart),
+        lte(event.startedAt, lastMonthEnd)
+      )
+    );
+
+  const eventCostLastMonth = parseFloat(eventsLastMonthResult[0]?.totalCost || '0');
+  const totalCostLastMonth = snapshotCostLastMonth + eventCostLastMonth;
+
   const evolution =
     totalCostLastMonth > 0
       ? ((totalCostMTD - totalCostLastMonth) / totalCostLastMonth) * 100
@@ -78,7 +123,8 @@ export default async function DashboardPage({ params }: PageProps) {
     .sort((a, b) => b.cost - a.cost)
     .slice(0, 3);
 
-  const totalRequests = allSnapshots.reduce((sum, s) => sum + s.requests, 0);
+  const snapshotRequests = allSnapshots.reduce((sum, s) => sum + s.requests, 0);
+  const totalRequests = snapshotRequests + eventRequestsTotal;
 
   const providerNames: Record<string, string> = {
     anthropic: 'Anthropic',
