@@ -104,3 +104,15 @@ const salt = crypto
 - Auth : OAuth Better Auth ou API key custom
 - Effort : 3-5j MVP, 7-10j polish
 - Idee differenciante vs concurrents (Helicone, OpenLLMetry, Langfuse) qui se basent uniquement sur API keys
+
+## V1.5 - Performance optimization
+- Parallel Server Components queries (Promise.all dans dashboard, billing, budgets, providers)
+- Verify production performance after deployment (build prod = beaucoup plus rapide que dev)
+- Si toujours lent en prod : Drizzle select() pour limiter colonnes, indexes DB sur foreign keys, connection pooling
+
+## Phase 8.5 - Design polish (apres deploiement)
+Audit visuel page par page : Dashboard, Providers, Budgets, Radar, Billing, Settings, API Keys
+Comparaison mockups/screen-X.jsx vs live
+Composants partages a aligner : KPI cards, sidebar items, dialogs, tables, buttons
+Estimation : 2-4h selon ecart
+A faire avant de partager publiquement Costwave
