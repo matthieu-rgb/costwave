@@ -8,6 +8,13 @@
       "when": 1777576518616,
       "tag": "0000_cuddly_leo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777724873971,
+      "tag": "0001_common_joystick",
+      "breakpoints": true
     }
   ]
 }

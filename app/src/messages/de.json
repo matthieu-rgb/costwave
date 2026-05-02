@@ -413,5 +413,22 @@
       "realtime": "Echtzeit",
       "days": "Tage"
     }
+  },
+  "settings": {
+    "apiKeys": {
+      "title": "API-Schlussel",
+      "description": "API-Schlussel fur externe Integrationen verwalten",
+      "newKey": "Neuer API-Schlussel",
+      "name": "Name",
+      "created": "Erstellt",
+      "lastUsed": "Zuletzt verwendet",
+      "revoke": "Widerrufen",
+      "copy": "Kopieren",
+      "warning": "Speichern Sie diesen Schlussel jetzt",
+      "warningDetail": "Sie konnen ihn nicht erneut sehen",
+      "done": "Fertig",
+      "noKeys": "Keine API-Schlussel vorhanden",
+      "noKeysDetail": "Erstellen Sie einen, um Claude Code, n8n oder das Python-SDK zu integrieren"
+    }
   }
 }

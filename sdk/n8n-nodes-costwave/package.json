@@ -1,0 +1,22 @@
+{
+  "name": "n8n-nodes-costwave",
+  "version": "0.1.0",
+  "description": "n8n node for Costwave AI cost tracking",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["n8n-community-node-package", "costwave"],
+  "author": "Matthieu",
+  "license": "MIT",
+  "n8n": {
+    "credentials": ["costwaveApi"],
+    "nodes": ["dist/nodes/Costwave/Costwave.node.js"]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}

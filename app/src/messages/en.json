@@ -413,5 +413,22 @@
       "realtime": "Realtime",
       "days": "days"
     }
+  },
+  "settings": {
+    "apiKeys": {
+      "title": "API Keys",
+      "description": "Manage API keys for external integrations",
+      "newKey": "New API Key",
+      "name": "Name",
+      "created": "Created",
+      "lastUsed": "Last used",
+      "revoke": "Revoke",
+      "copy": "Copy",
+      "warning": "Save this key now",
+      "warningDetail": "You won't be able to see it again",
+      "done": "Done",
+      "noKeys": "No API keys yet",
+      "noKeysDetail": "Create one to integrate Claude Code, n8n, or Python SDK"
+    }
   }
 }

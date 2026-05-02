@@ -413,5 +413,22 @@
       "realtime": "Temps reel",
       "days": "jours"
     }
+  },
+  "settings": {
+    "apiKeys": {
+      "title": "Cles API",
+      "description": "Gerer les cles API pour les integrations externes",
+      "newKey": "Nouvelle Cle API",
+      "name": "Nom",
+      "created": "Creee",
+      "lastUsed": "Derniere utilisation",
+      "revoke": "Revoquer",
+      "copy": "Copier",
+      "warning": "Enregistrez cette cle maintenant",
+      "warningDetail": "Vous ne pourrez plus la voir",
+      "done": "Termine",
+      "noKeys": "Aucune cle API",
+      "noKeysDetail": "Creez-en une pour integrer Claude Code, n8n ou le SDK Python"
+    }
   }
 }
