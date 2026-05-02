@@ -40,6 +40,28 @@ Events appear in Costwave dashboard under "claude-code-session" workflow.
 
 ## Troubleshooting
 
-- If tracking fails, Claude Code still runs normally
-- Check API key is valid: `echo $COSTWAVE_API_KEY`
+### Tracking Fails Silently
+
+- Claude Code still runs normally even if Costwave API is down
+- Check wrapper is called: `type claude`
+- Verify API key: `echo $COSTWAVE_API_KEY`
 - Test endpoint: `curl -H "Authorization: Bearer $COSTWAVE_API_KEY" $COSTWAVE_URL/api/health`
+
+### Events Not Appearing
+
+- Wait 30 seconds (async sending)
+- Check dashboard filters (workflow name must match)
+- Verify API key wasn't revoked in Settings > API Keys
+- Test with direct API call:
+  ```bash
+  curl -X POST $COSTWAVE_URL/api/v1/events/ingest \
+    -H "Authorization: Bearer $COSTWAVE_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"type":"test","provider":"anthropic","model":"test","inputTokens":0,"outputTokens":0}'
+  ```
+
+### Alias Not Found
+
+- Reload shell: `source ~/.zshrc`
+- Check alias is set: `alias | grep claude`
+- Ensure path is correct: `ls -la /path/to/costwave/hooks/costwave-claude.sh`

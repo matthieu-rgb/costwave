@@ -1,3 +1,17 @@
+/**
+ * Better Auth configuration for Costwave.
+ *
+ * Provides multi-factor authentication with:
+ * - Email/password authentication
+ * - Magic link (passwordless email)
+ * - Passkey (WebAuthn/biometric)
+ * - Two-factor authentication (TOTP)
+ *
+ * Sessions expire after 30 days.
+ * Rate limiting: 5 login/signup attempts per 15 minutes (built-in).
+ *
+ * @see https://better-auth.com/docs
+ */
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { magicLink } from 'better-auth/plugins';

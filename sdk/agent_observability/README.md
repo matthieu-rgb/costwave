@@ -62,11 +62,32 @@ sender.close()  # Flushes remaining events
 
 ## Configuration
 
+### Parameters
+
 - `api_key`: Get from Costwave dashboard (Settings > API Keys)
 - `base_url`: Default `https://costwave.app` (change for self-hosted)
 - `timeout`: Request timeout in seconds (default: 10.0)
 
-## Self-Hosted
+### Environment Variables
+
+Set these to avoid hardcoding credentials:
+
+```bash
+export COSTWAVE_API_KEY="ck_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+export COSTWAVE_URL="https://costwave.app"  # Optional, for self-hosted
+export COSTWAVE_WORKFLOW_NAME="my-agent"    # Optional, default workflow name
+```
+
+Then use client without parameters:
+
+```python
+from costwave import CostwaveClient
+
+# Reads from environment
+client = CostwaveClient()
+```
+
+### Self-Hosted
 
 ```python
 client = CostwaveClient(
