@@ -94,11 +94,9 @@ export function CreateBudgetDialog({ providers = [], workflows = [] }: CreateBud
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button className="gap-2 rounded-sm border-[hsl(var(--mc-text))] bg-[hsl(var(--mc-text))] px-3.5 py-2 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-[hsl(var(--mc-bg))] hover:bg-[hsl(var(--mc-text))]">
-          <Plus className="h-3 w-3" />
-          NEW.BUDGET
-        </Button>
+      <DialogTrigger className="flex items-center gap-2 rounded-sm border-[hsl(var(--mc-text))] bg-[hsl(var(--mc-text))] px-3.5 py-2 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-[hsl(var(--mc-bg))] hover:bg-[hsl(var(--mc-text))]/90 transition-colors">
+        <Plus className="h-3 w-3" strokeWidth={1.5} />
+        NEW.BUDGET
       </DialogTrigger>
       <DialogContent className="rounded-none border-[hsl(var(--mc-border))] bg-[hsl(var(--mc-panel))] font-mono sm:max-w-[520px]">
         {/* Top accent line */}

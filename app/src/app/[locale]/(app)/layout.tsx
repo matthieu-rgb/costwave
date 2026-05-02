@@ -28,7 +28,7 @@ export default async function AppLayout({
       <div className="flex flex-col flex-1 md:ml-64">
         <TopBar user={session.user} />
 
-        <main id="main-content" className="flex-1 overflow-auto">
+        <main id="main-content" className="flex-1 overflow-auto p-6 md:p-8">
           {children}
         </main>
       </div>

@@ -30,7 +30,9 @@ export function Sidebar() {
       <nav className="flex-1 p-4 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+          // Remove locale prefix from pathname for comparison
+          const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}/, '')
+          const isActive = pathWithoutLocale === item.href || pathWithoutLocale.startsWith(item.href + '/')
 
           return (
             <Link
