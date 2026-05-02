@@ -4,7 +4,7 @@ import { Shield } from 'lucide-react';
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { budget, providerCredential, providerUsageSnapshot, event, workflow } from '@/lib/db/schema';
-import { eq, and, gte, lte, sql } from 'drizzle-orm';
+import { eq, and, gte, lte, sql, inArray } from 'drizzle-orm';
 import { BudgetCard } from '@/components/app/BudgetCard';
 import { CreateBudgetDialog } from '@/components/app/CreateBudgetDialog';
 import { MCBadge } from '@/components/app/MCBadge';
@@ -59,17 +59,24 @@ async function calculateBudgetUsage(
 
   try {
     if (budgetData.scope === 'global') {
+      // Get user's credentials
+      const credentials = await db.query.providerCredential.findMany({
+        where: eq(providerCredential.userId, budgetData.userId),
+        columns: { id: true },
+      });
+
+      if (credentials.length === 0) return 0;
+
+      const credentialIds = credentials.map((c) => c.id);
+
       const result = await db
         .select({
           total: sql<string>`COALESCE(SUM(${providerUsageSnapshot.costUsd}), 0)`,
         })
         .from(providerUsageSnapshot)
-        .innerJoin(
-          sql`(SELECT id FROM provider_credential WHERE "userId" = ${budgetData.userId})`,
-          sql`provider_usage_snapshot."credentialId" = id`
-        )
         .where(
           and(
+            inArray(providerUsageSnapshot.credentialId, credentialIds),
             gte(providerUsageSnapshot.periodStart, effectivePeriodStart),
             lte(providerUsageSnapshot.periodEnd, new Date())
           )

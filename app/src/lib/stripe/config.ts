@@ -37,8 +37,8 @@ export const PLANS = {
 export type PlanType = keyof typeof PLANS;
 
 // Stripe price IDs from environment
-export const STRIPE_PRICE_PRO_MONTHLY = process.env.STRIPE_PRICE_PRO_MONTHLY;
-export const STRIPE_PRICE_PRO_YEARLY = process.env.STRIPE_PRICE_PRO_YEARLY;
+export const STRIPE_PRICE_PRO_MONTHLY = process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_MONTHLY;
+export const STRIPE_PRICE_PRO_YEARLY = process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_YEARLY;
 
 // Price display
 export const PRICING = {

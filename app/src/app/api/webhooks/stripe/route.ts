@@ -35,6 +35,53 @@ if (!STRIPE_WEBHOOK_SECRET) {
   console.warn('⚠️  STRIPE_WEBHOOK_SECRET not set - webhook verification will fail');
 }
 
+/**
+ * Extract current_period_end from Stripe Subscription
+ * Stripe API 2026-04-22.dahlia moved current_period_end to items.data[0].current_period_end
+ */
+function extractCurrentPeriodEnd(subscription: Stripe.Subscription): Date {
+  const subId = subscription.id;
+
+  // Try new location first (API 2026-04-22.dahlia+)
+  if (subscription.items?.data && subscription.items.data.length > 0) {
+    const itemPeriodEnd = subscription.items.data[0].current_period_end;
+    if (itemPeriodEnd && typeof itemPeriodEnd === 'number') {
+      const date = new Date(itemPeriodEnd * 1000);
+      if (!isNaN(date.getTime())) {
+        console.log(`[webhook] Using items.data[0].current_period_end for ${subId}`);
+        return date;
+      }
+    }
+  } else {
+    console.warn(`[webhook] subscription.items.data is empty or missing for ${subId}`);
+  }
+
+  // Fallback to old location (pre-2026 API versions)
+  const legacyPeriodEnd = (subscription as any).current_period_end;
+  if (legacyPeriodEnd && typeof legacyPeriodEnd === 'number') {
+    const date = new Date(legacyPeriodEnd * 1000);
+    if (!isNaN(date.getTime())) {
+      console.log(`[webhook] Using legacy current_period_end for ${subId}`);
+      return date;
+    }
+  }
+
+  // Last resort: use billing_cycle_anchor
+  if (subscription.billing_cycle_anchor && typeof subscription.billing_cycle_anchor === 'number') {
+    const date = new Date(subscription.billing_cycle_anchor * 1000);
+    if (!isNaN(date.getTime())) {
+      console.warn(`[webhook] Using billing_cycle_anchor as fallback for ${subId}`);
+      return date;
+    }
+  }
+
+  // Emergency fallback: current date + 30 days
+  const fallback = new Date();
+  fallback.setDate(fallback.getDate() + 30);
+  console.error(`[webhook] All timestamp fields missing or invalid for ${subId}, using +30 days fallback`);
+  return fallback;
+}
+
 async function logAudit(params: {
   userId: string | null;
   action: string;
@@ -53,9 +100,15 @@ async function logAudit(params: {
   });
 }
 
-async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
-  const customerId = subscription.customer as string;
-  const subscriptionId = subscription.id;
+async function handleSubscriptionCreated(subscriptionFromEvent: Stripe.Subscription) {
+  const customerId = subscriptionFromEvent.customer as string;
+  const subscriptionId = subscriptionFromEvent.id;
+
+  // Fetch full subscription with items expanded to ensure current_period_end is available
+  // Webhook events may not include all nested fields
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+    expand: ['items.data.price'],
+  });
 
   // Fetch customer to get email
   const customer = await stripe.customers.retrieve(customerId);
@@ -85,7 +138,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     stripeSubscriptionId: subscriptionId,
     plan: 'pro' as const,
     status: subscription.status,
-    currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+    currentPeriodEnd: extractCurrentPeriodEnd(subscription),
   };
 
   if (existingSubscription) {
@@ -126,8 +179,13 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   console.log(`✓ Subscription created for user ${existingUser.id}`);
 }
 
-async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
-  const subscriptionId = subscription.id;
+async function handleSubscriptionUpdated(subscriptionFromEvent: Stripe.Subscription) {
+  const subscriptionId = subscriptionFromEvent.id;
+
+  // Fetch full subscription with items expanded to ensure current_period_end is available
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
+    expand: ['items.data.price'],
+  });
 
   const existingSubscription = await db.query.subscription.findFirst({
     where: eq(subscriptionTable.stripeSubscriptionId, subscriptionId),
@@ -141,7 +199,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   await db.update(subscriptionTable)
     .set({
       status: subscription.status,
-      currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+      currentPeriodEnd: extractCurrentPeriodEnd(subscription),
       updatedAt: new Date(),
     })
     .where(eq(subscriptionTable.stripeSubscriptionId, subscriptionId));
@@ -321,12 +379,18 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        console.log(`[webhook] Unhandled event type: ${event.type} (ignored, not an error)`);
     }
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Error processing webhook:', error instanceof Error ? error.message : 'Unknown error');
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    console.error('[webhook] Error processing event:', errorMessage);
+    if (errorStack) {
+      console.error('[webhook] Stack trace:', errorStack);
+    }
+    console.error('[webhook] Event type:', event.type);
     return NextResponse.json(
       { error: 'Webhook processing failed' },
       { status: 500 }

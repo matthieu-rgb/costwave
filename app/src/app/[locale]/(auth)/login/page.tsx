@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { signIn } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,7 @@ import { Card } from '@/components/ui/card';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,9 @@ export default function LoginPage() {
         email,
         password,
       });
-      router.push('/app');
+
+      const callbackUrl = searchParams.get('callbackUrl');
+      router.push(callbackUrl || '/app');
     } catch (error) {
       console.error('Login failed:', error);
     } finally {

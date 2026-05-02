@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { signUp } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,7 @@ import { Card } from '@/components/ui/card';
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -25,7 +27,9 @@ export default function SignupPage() {
         password,
         name,
       });
-      router.push('/app');
+
+      const callbackUrl = searchParams.get('callbackUrl');
+      router.push(callbackUrl || '/app/providers');
     } catch (error) {
       console.error('Signup failed:', error);
     } finally {

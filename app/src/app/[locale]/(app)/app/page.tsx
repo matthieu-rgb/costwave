@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { providerCredential, providerUsageSnapshot } from '@/lib/db/schema';
-import { eq, desc, sql } from 'drizzle-orm';
+import { eq, desc, inArray } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -28,15 +28,14 @@ export default async function DashboardPage({ params }: PageProps) {
   });
 
   // Get all usage snapshots for user's providers
-  const allSnapshots = await db.query.providerUsageSnapshot.findMany({
-    where: sql`${providerUsageSnapshot.credentialId} IN (
-      SELECT ${providerCredential.id}
-      FROM ${providerCredential}
-      WHERE ${providerCredential.userId} = ${session.user.id}
-    )`,
-    orderBy: desc(providerUsageSnapshot.periodStart),
-    limit: 100,
-  });
+  const credentialIds = providers.map((p) => p.id);
+  const allSnapshots = credentialIds.length === 0
+    ? []
+    : await db.query.providerUsageSnapshot.findMany({
+        where: inArray(providerUsageSnapshot.credentialId, credentialIds),
+        orderBy: desc(providerUsageSnapshot.periodStart),
+        limit: 100,
+      });
 
   // Calculate total cost MTD (month-to-date)
   const now = new Date();

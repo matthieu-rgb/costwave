@@ -1,12 +1,13 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { auth } from './lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
+import { betterFetch } from '@better-fetch/fetch';
+import type { Session } from 'better-auth/types';
 
 const i18nMiddleware = createMiddleware(routing);
 
-export default async function middleware(request: NextRequest) {
-  // i18n middleware first (handles locale routing)
+export default async function proxy(request: NextRequest) {
+  // i18n routing first (handles locale routing)
   const response = i18nMiddleware(request);
 
   // Auth protection for (app)/* routes
@@ -18,7 +19,12 @@ export default async function middleware(request: NextRequest) {
 
   // Protect all /{locale}/app/* routes
   if (pathWithoutLocale.startsWith('/app')) {
-    const session = await auth.api.getSession({ headers: request.headers });
+    const { data: session } = await betterFetch<Session>('/api/auth/get-session', {
+      baseURL: request.nextUrl.origin,
+      headers: {
+        cookie: request.headers.get('cookie') || '',
+      },
+    });
 
     if (!session) {
       const locale = localeMatch?.[1] || routing.defaultLocale;

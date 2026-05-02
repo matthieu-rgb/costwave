@@ -71,3 +71,36 @@ const salt = crypto
 - [ ] Regenerer RESEND_API_KEY (idem)
 - [ ] Verifier que .env.local n'est jamais committe (check git history)
 - [ ] Ajouter detection secrets pre-commit hook (git-secrets, gitleaks)
+
+## PWA Turbopack migration (V1.5)
+- Next.js 16 utilise Turbopack par defaut, incompatible avec Serwist actuel
+- Options : 
+  - Migrer vers @serwist/turbopack (experimental)
+  - Forcer webpack avec NEXT_USE_WEBPACK=true (workaround)
+- Pour l'instant : PWA fonctionne en build prod (npm run build && npm run start), pas en dev
+- Test PWA reporté en Phase 10 (deploiement avec build prod)
+
+## Bugs à fixer Phase 8 (polish)
+- Hydration error sur [locale]/layout.tsx ligne 32 (className Geist server vs Plex Mono client)
+- "middleware" deprecated en Next.js 16 (à migrer vers "proxy" convention)
+
+## Database isolation Costwave / Langfuse (V1.5)
+- En dev : Costwave utilise DB "costwave" et Langfuse utilise DB "postgres" dans le meme container
+- En prod : creer 2 instances Postgres distinctes, ou 2 DB distinctes avec users dedies
+- Documenter l'init DB dans README.md (CREATE DATABASE costwave avant npx drizzle-kit push)
+
+## Cleanup tables Costwave dans DB postgres (V1.5)
+- Les 13 tables Costwave existent en double dans la DB "postgres" (residuel d'un mauvais drizzle-kit push initial)
+- Ne perturbent pas Costwave (DATABASE_URL pointe vers DB "costwave"), mais polluent la DB Langfuse
+- A nettoyer : DROP TABLE en cascade des 13 tables Costwave dans la DB "postgres"
+- Liste : account, audit_log, budget, budget_alert_sent, event, provider_credential, provider_usage_snapshot, push_subscription, session, subscription, user, verification, workflow
+
+## V1.5 ou V2 - Extension Chrome Costwave
+- Cas d'usage : capture automatique usage IA sur claude.ai et chatgpt.com sans API key
+- Cost overlay en temps reel sur les conversations
+- Quick-launch popup avec KPI MTD
+- Stack : WXT ou Plasmo + React + TypeScript
+- Manifest V3
+- Auth : OAuth Better Auth ou API key custom
+- Effort : 3-5j MVP, 7-10j polish
+- Idee differenciante vs concurrents (Helicone, OpenLLMetry, Langfuse) qui se basent uniquement sur API keys

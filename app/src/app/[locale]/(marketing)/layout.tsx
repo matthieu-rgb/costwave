@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 
 async function MarketingHeader() {
@@ -25,7 +25,7 @@ async function MarketingHeader() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/signin"
+            href="/login"
             className="font-mono text-[10px] tracking-[0.15em] text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
           >
             SIGN IN
