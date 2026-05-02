@@ -59,3 +59,12 @@
 - Pas de console.log oublies
 - Pas de hardcode de strings UI (toujours via i18n)
 - Pas de couleur hex en dur (toujours via design tokens)
+
+## Git commit conventions
+
+NEVER add the following to commit messages:
+- "Co-Authored-By: Claude" or any AI co-author tag
+- "Generated with Claude Code" or any generation marker
+- Any reference to AI/Claude/Anthropic
+
+Commits should look human-authored. Use Conventional Commits format only.
