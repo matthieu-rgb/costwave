@@ -25,13 +25,13 @@ async function MarketingHeader() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/login"
+            href="login"
             className="font-mono text-[10px] tracking-[0.15em] text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
           >
             SIGN IN
           </Link>
           <Link
-            href="/signup"
+            href="signup"
             className="rounded-sm bg-[hsl(var(--color-text))] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.15em] text-[hsl(var(--color-bg))] hover:bg-[hsl(var(--color-text))]/90"
           >
             SIGN UP →
@@ -162,7 +162,7 @@ export default function MarketingLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <MarketingHeader />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <MarketingFooter />
     </div>
   );

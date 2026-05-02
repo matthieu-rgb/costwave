@@ -62,7 +62,7 @@ export function ApiKeysList({ initialKeys }: { initialKeys: any[] }) {
           {keys.length} active {keys.length === 1 ? 'key' : 'keys'}
         </p>
         <Button onClick={() => setShowCreateDialog(true)}>
-          <Plus className="w-4 h-4 mr-2" />
+          <Plus className="w-4 h-4 mr-2" strokeWidth={1.5} />
           New API Key
         </Button>
       </div>
@@ -85,8 +85,9 @@ export function ApiKeysList({ initialKeys }: { initialKeys: any[] }) {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleRevoke(key.id)}
+                aria-label="Revoke API key"
               >
-                <Trash2 className="w-4 h-4 text-red" />
+                <Trash2 className="w-4 h-4 text-red" strokeWidth={1.5} />
               </Button>
             </div>
           </Card>
@@ -142,8 +143,9 @@ export function ApiKeysList({ initialKeys }: { initialKeys: any[] }) {
                     size="sm"
                     variant="secondary"
                     onClick={() => copyToClipboard(generatedKey)}
+                    aria-label="Copy API key to clipboard"
                   >
-                    <Copy className="w-4 h-4" />
+                    <Copy className="w-4 h-4" strokeWidth={1.5} />
                   </Button>
                 </div>
               </div>

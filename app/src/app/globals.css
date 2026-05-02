@@ -77,6 +77,12 @@
   }
 }
 
+/* Mission Control focus rings */
+*:focus-visible {
+  outline: 2px solid hsl(var(--mc-phosphor));
+  outline-offset: 2px;
+}
+
 @layer utilities {
   .mc-grid-bg {
     background-image: radial-gradient(hsl(210 14% 7%) 1px, transparent 1px);
