@@ -116,3 +116,20 @@ Comparaison mockups/screen-X.jsx vs live
 Composants partages a aligner : KPI cards, sidebar items, dialogs, tables, buttons
 Estimation : 2-4h selon ecart
 A faire avant de partager publiquement Costwave
+
+## Phase 11 - CI/CD avec GitHub Actions
+Setup automatique deploy sur push main vers VPS :
+- User deploy dedie sur VPS avec cle SSH
+- Cle SSH privee dans GitHub Secrets
+- Workflow .github/workflows/deploy.yml
+- ssh-action -> git pull + docker compose up -d --build
+- Notifications optionnelles Slack/Discord/email
+
+Estimation : 30-45 min apres premier deploiement reussi V1.
+
+## Phase 11.1 - CI/CD avance (V1.5+)
+- Tests automatiques avant deploy (lint, typecheck, Playwright e2e)
+- Build dans GitHub Actions, push image vers GHCR
+- VPS pull image au lieu de build (economise RAM)
+- Staging environment dev -> staging -> prod
+- Blue-green deployments (zero downtime)
