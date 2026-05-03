@@ -101,6 +101,11 @@ async function logAudit(params: {
 }
 
 async function handleSubscriptionCreated(subscriptionFromEvent: Stripe.Subscription) {
+  if (!stripe) {
+    console.error('Stripe not configured');
+    return;
+  }
+
   const customerId = subscriptionFromEvent.customer as string;
   const subscriptionId = subscriptionFromEvent.id;
 
@@ -180,6 +185,11 @@ async function handleSubscriptionCreated(subscriptionFromEvent: Stripe.Subscript
 }
 
 async function handleSubscriptionUpdated(subscriptionFromEvent: Stripe.Subscription) {
+  if (!stripe) {
+    console.error('Stripe not configured');
+    return;
+  }
+
   const subscriptionId = subscriptionFromEvent.id;
 
   // Fetch full subscription with items expanded to ensure current_period_end is available
@@ -320,6 +330,15 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
 }
 
 export async function POST(req: NextRequest) {
+  // Early return if Stripe not configured (V1 production)
+  if (!STRIPE_WEBHOOK_SECRET) {
+    console.warn('Stripe webhook called but STRIPE_WEBHOOK_SECRET not configured');
+    return NextResponse.json(
+      { error: 'Stripe not configured' },
+      { status: 503 }
+    );
+  }
+
   const body = await req.text();
   const headersList = await headers();
   const signature = headersList.get('stripe-signature');
@@ -332,11 +351,11 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!STRIPE_WEBHOOK_SECRET) {
-    console.error('STRIPE_WEBHOOK_SECRET not configured');
+  if (!stripe) {
+    console.error('Stripe client not initialized');
     return NextResponse.json(
-      { error: 'Webhook secret not configured' },
-      { status: 500 }
+      { error: 'Stripe not configured' },
+      { status: 503 }
     );
   }
 

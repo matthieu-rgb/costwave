@@ -64,6 +64,14 @@ export async function createCheckoutSession(
   input: CreateCheckoutSessionInput
 ): Promise<ActionResult> {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return {
+        success: false,
+        error: 'Payment system is not configured. Please contact support.',
+      };
+    }
+
     // Validate input
     const validation = CreateCheckoutSessionSchema.safeParse(input);
     if (!validation.success) {
@@ -178,6 +186,14 @@ export async function createCheckoutSession(
  */
 export async function createPortalSession(): Promise<ActionResult> {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return {
+        success: false,
+        error: 'Payment system is not configured. Please contact support.',
+      };
+    }
+
     // Get session
     const headersList = await headers();
     const session = await auth.api.getSession({

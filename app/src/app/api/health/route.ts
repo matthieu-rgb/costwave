@@ -8,18 +8,22 @@ export async function GET() {
     await db.execute(sql`SELECT 1`);
     const dbStatus = 'connected';
 
-    // Ping Langfuse
-    const langfuseHost = process.env.LANGFUSE_HOST || 'http://localhost:3000';
-    let langfuseStatus = 'unknown';
+    // Ping Langfuse (skip if not configured)
+    let langfuseStatus = 'disabled';
 
-    try {
-      const response = await fetch(`${langfuseHost}/api/public/health`, {
-        method: 'GET',
-        signal: AbortSignal.timeout(3000),
-      });
-      langfuseStatus = response.ok ? 'connected' : 'error';
-    } catch {
-      langfuseStatus = 'unreachable';
+    if (process.env.LANGFUSE_PUBLIC_KEY && process.env.LANGFUSE_SECRET_KEY) {
+      const langfuseHost = process.env.LANGFUSE_HOST || 'http://localhost:3000';
+      langfuseStatus = 'unknown';
+
+      try {
+        const response = await fetch(`${langfuseHost}/api/public/health`, {
+          method: 'GET',
+          signal: AbortSignal.timeout(3000),
+        });
+        langfuseStatus = response.ok ? 'connected' : 'error';
+      } catch {
+        langfuseStatus = 'unreachable';
+      }
     }
 
     return NextResponse.json({

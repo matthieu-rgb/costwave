@@ -1,0 +1,41 @@
+# Caddyfile for Costwave production deployment
+# Automatic HTTPS via Let's Encrypt
+
+# Main domain
+costwave.app {
+    # Reverse proxy to Next.js app
+    reverse_proxy costwave:3000
+
+    # Security headers
+    header {
+        # HTTP Strict Transport Security (HSTS)
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+
+        # Referrer policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+
+        # Permissions policy
+        Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    }
+
+    # Compression
+    encode gzip zstd
+
+    # Logging
+    log {
+        output stdout
+        format json
+        level INFO
+    }
+}
+
+# Redirect www to non-www
+www.costwave.app {
+    redir https://costwave.app{uri} permanent
+}
