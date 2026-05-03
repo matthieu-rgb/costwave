@@ -20,6 +20,22 @@ export default async function proxy(request: NextRequest) {
   // i18n routing first (handles locale routing)
   const response = i18nMiddleware(request);
 
+  // Rewrite Location header to remove internal port from redirects
+  if (response && forwardedHost && forwardedProto) {
+    const location = response.headers.get('location');
+    if (location) {
+      try {
+        const locationUrl = new URL(location);
+        locationUrl.host = forwardedHost;
+        locationUrl.protocol = forwardedProto + ':';
+        locationUrl.port = '';
+        response.headers.set('location', locationUrl.toString());
+      } catch (e) {
+        // Location may be relative, ignore
+      }
+    }
+  }
+
   // Auth protection for (app)/* routes
   const pathname = request.nextUrl.pathname;
 
