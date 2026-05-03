@@ -7,6 +7,16 @@ import type { Session } from 'better-auth/types';
 const i18nMiddleware = createMiddleware(routing);
 
 export default async function proxy(request: NextRequest) {
+  // Trust proxy headers to prevent port leaking in redirects
+  const forwardedHost = request.headers.get('x-forwarded-host');
+  const forwardedProto = request.headers.get('x-forwarded-proto');
+
+  if (forwardedHost && forwardedProto) {
+    request.nextUrl.protocol = forwardedProto.includes('https') ? 'https:' : 'http:';
+    request.nextUrl.host = forwardedHost;
+    request.nextUrl.port = '';
+  }
+
   // i18n routing first (handles locale routing)
   const response = i18nMiddleware(request);
 
