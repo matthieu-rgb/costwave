@@ -61,7 +61,8 @@ export default async function ProvidersPage({ params }: PageProps) {
         )}
       </div>
 
-      {!allowed && <UpgradePrompt feature="providers" currentCount={currentCount} maxAllowed={maxAllowed} />}
+      {/* V1: Paywall disabled - re-enable in V1.5 */}
+      {/* {!allowed && <UpgradePrompt feature="providers" currentCount={currentCount} maxAllowed={maxAllowed} />} */}
 
       {providers.length === 0 ? (
         <Card className="rounded-none border-[hsl(var(--mc-border))] bg-[hsl(var(--mc-panel))] p-12">
@@ -80,7 +81,7 @@ export default async function ProvidersPage({ params }: PageProps) {
               : null;
 
             return (
-              <Link key={provider.id} href={`/providers/${provider.id}`}>
+              <Link key={provider.id} href={`/${locale}/app/providers/${provider.id}`}>
                 <Card className="group cursor-pointer rounded-none border-[hsl(var(--mc-border))] bg-[hsl(var(--mc-panel))] p-4 transition-colors hover:border-[hsl(var(--mc-phosphor))]">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">

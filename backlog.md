@@ -188,6 +188,11 @@ A faire :
 6. Caddy bind sur 46.62.138.33:80 et :443 specifiquement (cohabite avec
    Tailscale qui utilise 100.94.199.97).
 
+7. Paywall V1 desactive : limite providers augmentee a 4 pour tous les users
+   (Stripe live non configure, evite 404 sur page billing). A reactiver V1.5.
+
+8. Lien VIEW provider fixe : href manquait prefix /${locale}/app/.
+
 ## Bugs Vincent (4 mai 2026) - status
 
 [FIXED] Lien GitHub footer (yourusername -> matthieu-rgb)
@@ -195,6 +200,8 @@ A faire :
 [FIXED] Page Security 404 (Mermaid CSS variables bug)
 [FIXED] Bouton ADD PROVIDER invisible
 [FIXED] Modele Anthropic deprecated dans validateKey
+[FIXED] Bouton VIEW provider link 404 (manquait /${locale}/app/ prefix)
+[FIXED] Paywall bloque testers (limite augmentee a 4 providers V1)
 [TODO] Page Radar mal calibree (traits) + page vide
 [TODO] Onglets About/Security/Docs inaccessibles depuis l'app loggee
 [TODO] Audit traductions FR/EN/DE (textes en dur)

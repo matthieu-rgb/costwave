@@ -69,8 +69,9 @@ export async function canAddProvider(userId: string): Promise<{
   currentCount: number;
   maxAllowed: number;
 }> {
-  const userIsPro = await isPro(userId);
-  const plan = userIsPro ? PLANS.pro : PLANS.free;
+  // V1: Temporarily allow 4 providers for all users (paywall disabled)
+  // TODO V1.5: Re-enable paywall after Stripe live mode + billing page
+  const maxAllowed = 4;
 
   const result = await db
     .select({ count: count() })
@@ -78,7 +79,6 @@ export async function canAddProvider(userId: string): Promise<{
     .where(eq(providerCredential.userId, userId));
 
   const currentCount = result[0]?.count || 0;
-  const maxAllowed = plan.maxProviders;
 
   return {
     allowed: currentCount < maxAllowed,
