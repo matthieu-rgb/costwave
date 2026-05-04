@@ -18,9 +18,14 @@ async function MarketingHeader() {
           <Link href="/pricing" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
             PRICING
           </Link>
-          <Link href="/docs" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+          <a
+            href="https://github.com/matthieu-rgb/costwave/tree/main/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
+          >
             DOCS
-          </Link>
+          </a>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -74,9 +79,14 @@ function MarketingFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/docs" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                <a
+                  href="https://github.com/matthieu-rgb/costwave/tree/main/docs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
+                >
                   Documentation
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -111,7 +121,7 @@ function MarketingFooter() {
             <ul className="space-y-2 font-mono text-[10px] tracking-wide">
               <li>
                 <a
-                  href="https://github.com/yourusername/costwave"
+                  href="https://github.com/matthieu-rgb/costwave"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
