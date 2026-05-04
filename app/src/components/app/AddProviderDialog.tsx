@@ -190,7 +190,7 @@ export function AddProviderDialog() {
             </Button>
             <Button
               type="submit"
-              className="rounded-sm border-[hsl(var(--mc-phosphor))] bg-[hsl(var(--mc-phosphor))] font-mono text-xs hover:bg-[hsl(var(--mc-phosphor))]/90"
+              className="rounded-sm border-[hsl(var(--mc-phosphor))] bg-[hsl(var(--mc-phosphor))] font-mono text-xs text-white hover:bg-[hsl(var(--mc-phosphor))]/90"
               disabled={loading}
             >
               {loading ? 'VALIDATING...' : 'ADD PROVIDER'}
