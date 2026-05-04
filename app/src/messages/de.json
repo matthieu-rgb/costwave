@@ -505,7 +505,16 @@
       "title": "Architektur",
       "description": "Verschlusselungsfluss fur Provider-API-Schlussel.",
       "noPlaintext": "Klartext-Schlussel NIEMALS gespeichert",
-      "pepperServerOnly": "ENCRYPTION_PEPPER nur auf dem Server, niemals im Code"
+      "pepperServerOnly": "ENCRYPTION_PEPPER nur auf dem Server, niemals im Code",
+      "flow": {
+        "userInput": "Benutzer gibt API-Schlussel ein",
+        "serverEncrypt": "Serverseitige Verschlusselung",
+        "encryptionAlgo": "AES-256-GCM + eindeutiger IV + Tag",
+        "dbStorage": "Verschlusselte Speicherung in DB",
+        "runtime": "Laufzeit-Entschlusselung (nur im Speicher)",
+        "providerCall": "Provider-API-Aufruf",
+        "discard": "Entschlusselter Schlussel verworfen"
+      }
     },
     "openSource": {
       "title": "Auditierbarer Code",

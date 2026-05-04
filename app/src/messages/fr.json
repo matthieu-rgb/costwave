@@ -505,7 +505,16 @@
       "title": "Architecture",
       "description": "Flux de chiffrement des cles API providers.",
       "noPlaintext": "Cle en clair JAMAIS stockee",
-      "pepperServerOnly": "ENCRYPTION_PEPPER uniquement sur serveur, jamais dans le code"
+      "pepperServerOnly": "ENCRYPTION_PEPPER uniquement sur serveur, jamais dans le code",
+      "flow": {
+        "userInput": "Utilisateur saisit la cle API",
+        "serverEncrypt": "Chiffrement cote serveur",
+        "encryptionAlgo": "AES-256-GCM + IV unique + tag",
+        "dbStorage": "Stockage chiffre en base de donnees",
+        "runtime": "Dechiffrement a l'execution (en memoire uniquement)",
+        "providerCall": "Appel API du provider",
+        "discard": "Cle dechiffree detruite"
+      }
     },
     "openSource": {
       "title": "Code auditable",

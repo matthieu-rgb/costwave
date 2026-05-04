@@ -505,7 +505,16 @@
       "title": "Architecture",
       "description": "Provider API key encryption flow.",
       "noPlaintext": "Plaintext key NEVER stored",
-      "pepperServerOnly": "ENCRYPTION_PEPPER server-only, never in code"
+      "pepperServerOnly": "ENCRYPTION_PEPPER server-only, never in code",
+      "flow": {
+        "userInput": "User enters API key",
+        "serverEncrypt": "Server-side encryption",
+        "encryptionAlgo": "AES-256-GCM + unique IV + tag",
+        "dbStorage": "Encrypted storage in DB",
+        "runtime": "Runtime decryption (in-memory only)",
+        "providerCall": "Provider API call",
+        "discard": "Decrypted key discarded"
+      }
     },
     "openSource": {
       "title": "Auditable code",

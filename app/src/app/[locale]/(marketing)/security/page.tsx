@@ -2,8 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Lock, Key, Shield, Info } from 'lucide-react';
-import { MermaidDiagram } from '@/components/marketing/mermaid-diagram';
+import { Lock, Key, Shield, Info, User, Server, Database, ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Security - Costwave',
@@ -41,19 +40,6 @@ function EncryptionCard({
 
 export default async function SecurityPage() {
   const t = await getTranslations('security');
-
-  const architectureDiagram = `
-graph TB
-  A[User enters API key] --> B[Server-side encryption]
-  B --> C[AES-256-GCM + unique IV + tag]
-  C --> D[Encrypted storage in DB]
-  D --> E[Runtime decryption - in-memory only]
-  E --> F[Provider API call]
-  F --> G[Decrypted key discarded]
-
-  style C fill:#00ffcc,stroke:#00ffcc,color:#000
-  style G fill:#ff0055,stroke:#ff0055,color:#fff
-`;
 
   return (
     <div>
@@ -122,8 +108,85 @@ graph TB
             </p>
           </div>
 
-          <div className="mb-8 overflow-x-auto rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-bg))] p-6">
-            <MermaidDiagram chart={architectureDiagram} className="flex justify-center" />
+          <div className="mb-8 overflow-x-auto rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-bg))] p-8">
+            <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-panel))]">
+                  <User className="h-6 w-6 text-[hsl(var(--color-text-dim))]" strokeWidth={1.5} />
+                </div>
+                <p className="max-w-[100px] text-center font-mono text-[10px] leading-tight text-[hsl(var(--color-text-dim))]">
+                  {t('architecture.flow.userInput')}
+                </p>
+              </div>
+
+              <ArrowRight className="hidden h-5 w-5 flex-shrink-0 self-center text-[hsl(var(--color-phosphor))] md:block" strokeWidth={1.5} />
+              <div className="block h-5 w-5 rotate-90 text-[hsl(var(--color-phosphor))] md:hidden">
+                <ArrowRight strokeWidth={1.5} />
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-[hsl(var(--color-phosphor))] bg-[hsl(var(--color-phosphor))]/10">
+                  <Lock className="h-6 w-6 text-[hsl(var(--color-phosphor))]" strokeWidth={1.5} />
+                </div>
+                <p className="max-w-[120px] text-center font-mono text-[10px] leading-tight text-[hsl(var(--color-text-dim))]">
+                  {t('architecture.flow.serverEncrypt')}
+                </p>
+                <Badge className="rounded-sm border-[hsl(var(--color-phosphor))] bg-[hsl(var(--color-phosphor))]/10 font-mono text-[8px] tracking-[0.1em] text-[hsl(var(--color-phosphor))]">
+                  {t('architecture.flow.encryptionAlgo')}
+                </Badge>
+              </div>
+
+              <ArrowRight className="hidden h-5 w-5 flex-shrink-0 self-center text-[hsl(var(--color-phosphor))] md:block" strokeWidth={1.5} />
+              <div className="block h-5 w-5 rotate-90 text-[hsl(var(--color-phosphor))] md:hidden">
+                <ArrowRight strokeWidth={1.5} />
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-panel))]">
+                  <Database className="h-6 w-6 text-[hsl(var(--color-text-dim))]" strokeWidth={1.5} />
+                </div>
+                <p className="max-w-[100px] text-center font-mono text-[10px] leading-tight text-[hsl(var(--color-text-dim))]">
+                  {t('architecture.flow.dbStorage')}
+                </p>
+              </div>
+
+              <ArrowRight className="hidden h-5 w-5 flex-shrink-0 self-center text-[hsl(var(--color-text-dim))] md:block" strokeWidth={1.5} />
+              <div className="block h-5 w-5 rotate-90 text-[hsl(var(--color-text-dim))] md:hidden">
+                <ArrowRight strokeWidth={1.5} />
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-panel))]">
+                  <Key className="h-6 w-6 text-[hsl(var(--color-text-dim))]" strokeWidth={1.5} />
+                </div>
+                <p className="max-w-[100px] text-center font-mono text-[10px] leading-tight text-[hsl(var(--color-text-dim))]">
+                  {t('architecture.flow.runtime')}
+                </p>
+              </div>
+
+              <ArrowRight className="hidden h-5 w-5 flex-shrink-0 self-center text-[hsl(var(--color-text-dim))] md:block" strokeWidth={1.5} />
+              <div className="block h-5 w-5 rotate-90 text-[hsl(var(--color-text-dim))] md:hidden">
+                <ArrowRight strokeWidth={1.5} />
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-[hsl(var(--color-border))] bg-[hsl(var(--color-panel))]">
+                  <Server className="h-6 w-6 text-[hsl(var(--color-text-dim))]" strokeWidth={1.5} />
+                </div>
+                <p className="max-w-[100px] text-center font-mono text-[10px] leading-tight text-[hsl(var(--color-text-dim))]">
+                  {t('architecture.flow.providerCall')}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <div className="flex items-center gap-2 rounded-sm border border-[hsl(var(--color-red-dim))] bg-[hsl(var(--color-red-dim))]/10 px-4 py-2">
+                <div className="h-2 w-2 rounded-full bg-[hsl(var(--color-red))]"></div>
+                <p className="font-mono text-[10px] tracking-wide text-[hsl(var(--color-red))]">
+                  {t('architecture.flow.discard')}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
