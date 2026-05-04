@@ -74,11 +74,17 @@ const salt = crypto
 
 ## PWA Turbopack migration (V1.5)
 - Next.js 16 utilise Turbopack par defaut, incompatible avec Serwist actuel
-- Options : 
+- Options :
   - Migrer vers @serwist/turbopack (experimental)
   - Forcer webpack avec NEXT_USE_WEBPACK=true (workaround)
 - Pour l'instant : PWA fonctionne en build prod (npm run build && npm run start), pas en dev
 - Test PWA reporté en Phase 10 (deploiement avec build prod)
+
+## PWA Install Prompt (V1.5)
+- Composant InstallPrompt retire (bouton non fonctionnel signale par testeur)
+- Infrastructure PWA conservee : Serwist, service worker, manifest.json, push subscriptions
+- Users peuvent toujours installer manuellement via menu navigateur
+- Decision strategie V1.5 : refaire composant install prompt fonctionnel OU retirer stack PWA complete si feature non prioritaire
 
 ## Bugs à fixer Phase 8 (polish)
 - Hydration error sur [locale]/layout.tsx ligne 32 (className Geist server vs Plex Mono client)

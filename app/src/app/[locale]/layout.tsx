@@ -5,7 +5,6 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Toaster } from 'sonner';
-import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import '../globals.css';
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -46,7 +45,6 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
           <Toaster />
-          <InstallPrompt />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -225,13 +225,6 @@
       "enable": "Activer",
       "dismiss": "Pas maintenant"
     },
-    "install": {
-      "title": "Installer Costwave",
-      "description": "Installez l'application pour un acces rapide et des notifications push.",
-      "install": "Installer",
-      "dismiss": "Pas maintenant",
-      "installed": "Application installee avec succes"
-    },
     "offline": {
       "title": "Mode hors ligne",
       "message": "Vous etes hors ligne. Les donnees affichees peuvent etre obsoletes.",
