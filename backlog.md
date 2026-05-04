@@ -140,16 +140,63 @@ Estimation : 30-45 min apres premier deploiement reussi V1.
 - Staging environment dev -> staging -> prod
 - Blue-green deployments (zero downtime)
 
-## Phase 11.5 - Refactor provider validation (V1.5)
+## Phase 11.5 - Refactor provider validation (Priorite : moyenne, 2-3h)
 
-**Problem**: Hardcoded model names in validateKey() can become deprecated, causing provider addition failures.
+Probleme :
+Les modeles utilises dans validateKey() de chaque provider sont hardcodes
+(ex: 'claude-haiku-4-20250514') et peuvent devenir deprecated. Bug rencontre
+le 4 mai 2026 : ajout d'un provider Anthropic retournait HTTP 404 car le
+modele etait deprecated.
 
-**Root cause**: Each provider's validateKey() makes POST /v1/messages (or equivalent) with a hardcoded model name to test API key validity. When providers deprecate models, validation breaks.
+Solution :
+Utiliser les endpoints /v1/models de chaque provider au lieu d'un appel
+a un modele specifique :
+- Anthropic : GET https://api.anthropic.com/v1/models
+- OpenAI : GET https://api.openai.com/v1/models
+- Groq : GET https://api.groq.com/openai/v1/models
+- Mistral : GET https://api.mistral.ai/v1/models
+- Google : GET https://generativelanguage.googleapis.com/v1beta/models?key=...
 
-**Solution**: Refactor validateKey() to use /v1/models endpoint instead of /v1/messages for all providers that support it. This avoids dependency on specific model availability.
+Avantages :
+- Plus robuste face aux deprecations
+- Plus leger (pas de tokens consommes)
+- Liste des modeles dispo cote serveur (utile pour UI future)
 
-**Alternative approach**: Keep current implementation but use most stable "latest" model aliases (e.g., mistral-small-latest) where available.
+A faire :
+1. Refactorer les 5 fonctions validateKey()
+2. Tester avec vraies cles pour chaque provider
+3. Documenter dans CLAUDE.md
+4. Ajouter tests unitaires
 
-**Estimation**: 2-3h
+## Decisions techniques notees aujourd'hui (4 mai 2026)
 
-**Priority**: Medium - only fix when another model gets deprecated
+1. PWA InstallPrompt retire (V1) - V1.5 decision : refaire prompt fonctionnel
+   ou retirer stack PWA complete (Serwist + manifest + push)
+
+2. Mermaid retire de /security (4 MB de dependances en moins). Diagramme
+   refait en HTML/Tailwind pur.
+
+3. Better Auth utilise scrypt par defaut (pas Argon2id comme initialement
+   pense). Documentation /security mise a jour.
+
+4. package-lock.json maintenant tracke en git (ajoute au .gitignore par
+   erreur, retire le 4 mai 2026).
+
+5. Dockerfile utilise npm install au lieu de npm ci (cross-platform
+   compatibility entre Mac M4 ARM64 dev et Linux x64 prod).
+
+6. Caddy bind sur 46.62.138.33:80 et :443 specifiquement (cohabite avec
+   Tailscale qui utilise 100.94.199.97).
+
+## Bugs Vincent (4 mai 2026) - status
+
+[FIXED] Lien GitHub footer (yourusername -> matthieu-rgb)
+[FIXED] /fr/docs 404 (redirige vers GitHub /docs/)
+[FIXED] Page Security 404 (Mermaid CSS variables bug)
+[FIXED] Bouton ADD PROVIDER invisible
+[FIXED] Modele Anthropic deprecated dans validateKey
+[TODO] Page Radar mal calibree (traits) + page vide
+[TODO] Onglets About/Security/Docs inaccessibles depuis l'app loggee
+[TODO] Audit traductions FR/EN/DE (textes en dur)
+[TODO V1.5] Page Contact avec formulaire
+[TODO V1.5] PWA install prompt fonctionnel ou retire complet
