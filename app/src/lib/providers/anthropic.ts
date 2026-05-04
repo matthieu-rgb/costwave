@@ -15,7 +15,7 @@ export const anthropicProvider: LLMProvider = {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'claude-haiku-4-20250514',
+          model: 'claude-haiku-4-5',
           max_tokens: 10,
           messages: [{ role: 'user', content: 'test' }],
         }),

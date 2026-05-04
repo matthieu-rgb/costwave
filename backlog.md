@@ -139,3 +139,17 @@ Estimation : 30-45 min apres premier deploiement reussi V1.
 - VPS pull image au lieu de build (economise RAM)
 - Staging environment dev -> staging -> prod
 - Blue-green deployments (zero downtime)
+
+## Phase 11.5 - Refactor provider validation (V1.5)
+
+**Problem**: Hardcoded model names in validateKey() can become deprecated, causing provider addition failures.
+
+**Root cause**: Each provider's validateKey() makes POST /v1/messages (or equivalent) with a hardcoded model name to test API key validity. When providers deprecate models, validation breaks.
+
+**Solution**: Refactor validateKey() to use /v1/models endpoint instead of /v1/messages for all providers that support it. This avoids dependency on specific model availability.
+
+**Alternative approach**: Keep current implementation but use most stable "latest" model aliases (e.g., mistral-small-latest) where available.
+
+**Estimation**: 2-3h
+
+**Priority**: Medium - only fix when another model gets deprecated
