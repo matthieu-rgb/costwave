@@ -13,10 +13,16 @@ async function MarketingHeader() {
 
         <nav className="hidden items-center gap-6 font-mono text-[10px] tracking-[0.15em] md:flex">
           <Link href="/#features" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-            FEATURES
+            {t('header.features').toUpperCase()}
           </Link>
           <Link href="/pricing" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-            PRICING
+            {t('header.pricing').toUpperCase()}
+          </Link>
+          <Link href="/about" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+            {t('header.about').toUpperCase()}
+          </Link>
+          <Link href="/security" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+            {t('header.security').toUpperCase()}
           </Link>
           <a
             href="https://github.com/matthieu-rgb/costwave/tree/main/docs"
@@ -24,7 +30,7 @@ async function MarketingHeader() {
             rel="noopener noreferrer"
             className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
           >
-            DOCS
+            {t('header.docs').toUpperCase()}
           </a>
         </nav>
 
@@ -33,13 +39,13 @@ async function MarketingHeader() {
             href="login"
             className="font-mono text-[10px] tracking-[0.15em] text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
           >
-            SIGN IN
+            {t('header.signin').toUpperCase()}
           </Link>
           <Link
             href="signup"
             className="rounded-sm bg-[hsl(var(--color-text))] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.15em] text-[hsl(var(--color-bg))] hover:bg-[hsl(var(--color-text))]/90"
           >
-            SIGN UP →
+            {t('header.signup').toUpperCase()} →
           </Link>
         </div>
       </div>
@@ -47,8 +53,9 @@ async function MarketingHeader() {
   );
 }
 
-function MarketingFooter() {
+async function MarketingFooter() {
   const currentYear = new Date().getFullYear();
+  const t = await getTranslations('marketing');
 
   return (
     <footer className="border-t border-[hsl(var(--color-border))] bg-[hsl(var(--color-panel))]">
@@ -59,23 +66,49 @@ function MarketingFooter() {
               COSTWAVE
             </div>
             <p className="font-mono text-[10px] leading-relaxed tracking-wide text-[hsl(var(--color-text-mute))]">
-              LLM COST OBSERVABILITY PLATFORM. BUILT IN FRANCE, OPERATED IN EUROPE.
+              {t('footer.tagline').toUpperCase()}
             </p>
           </div>
 
           <div>
             <h3 className="mb-3 font-mono text-[9px] tracking-[0.15em] text-[hsl(var(--color-text-mute))]">
-              PRODUCT
+              {t('footer.company').toUpperCase()}
+            </h3>
+            <ul className="space-y-2 font-mono text-[10px] tracking-wide">
+              <li>
+                <Link href="/about" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                  {t('footer.about')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/security" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                  {t('footer.security')}
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="mailto:contact@costwave.app"
+                  className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
+                >
+                  {t('footer.contact')}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-3 font-mono text-[9px] tracking-[0.15em] text-[hsl(var(--color-text-mute))]">
+              {t('footer.resources').toUpperCase()}
             </h3>
             <ul className="space-y-2 font-mono text-[10px] tracking-wide">
               <li>
                 <Link href="/#features" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-                  Features
+                  {t('footer.features')}
                 </Link>
               </li>
               <li>
                 <Link href="/pricing" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-                  Pricing
+                  {t('footer.pricing')}
                 </Link>
               </li>
               <li>
@@ -85,40 +118,9 @@ function MarketingFooter() {
                   rel="noopener noreferrer"
                   className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
                 >
-                  Documentation
+                  {t('footer.docs')}
                 </a>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-3 font-mono text-[9px] tracking-[0.15em] text-[hsl(var(--color-text-mute))]">
-              LEGAL
-            </h3>
-            <ul className="space-y-2 font-mono text-[10px] tracking-wide">
-              <li>
-                <Link href="/legal/terms" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal/privacy" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal/cookies" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
-                  Cookie Policy
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-3 font-mono text-[9px] tracking-[0.15em] text-[hsl(var(--color-text-mute))]">
-              CONNECT
-            </h3>
-            <ul className="space-y-2 font-mono text-[10px] tracking-wide">
               <li>
                 <a
                   href="https://github.com/matthieu-rgb/costwave"
@@ -126,16 +128,36 @@ function MarketingFooter() {
                   rel="noopener noreferrer"
                   className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
                 >
-                  GitHub
+                  {t('footer.github')}
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:hello@costwave.app"
-                  className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]"
-                >
-                  Contact
-                </a>
+                <span className="text-[hsl(var(--color-text-mute))]">
+                  {t('footer.blog')} ({t('footer.blogPlaceholder')})
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-3 font-mono text-[9px] tracking-[0.15em] text-[hsl(var(--color-text-mute))]">
+              {t('footer.legal').toUpperCase()}
+            </h3>
+            <ul className="space-y-2 font-mono text-[10px] tracking-wide">
+              <li>
+                <Link href="/legal/terms" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                  {t('footer.terms')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/privacy" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                  {t('footer.privacy')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/cookies" className="text-[hsl(var(--color-text-dim))] hover:text-[hsl(var(--color-text))]">
+                  {t('footer.cookies')}
+                </Link>
               </li>
             </ul>
           </div>

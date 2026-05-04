@@ -356,18 +356,26 @@
     "header": {
       "features": "Features",
       "pricing": "Pricing",
+      "about": "About",
+      "security": "Security",
       "docs": "Docs",
       "signin": "Sign In",
       "signup": "Sign Up"
     },
     "footer": {
       "tagline": "LLM cost observability platform. Built in France, operated in Europe.",
+      "company": "Company",
+      "resources": "Resources",
       "product": "Product",
       "legal": "Legal",
       "connect": "Connect",
+      "about": "About",
+      "security": "Security",
       "features": "Features",
       "pricing": "Pricing",
       "docs": "Documentation",
+      "blog": "Blog",
+      "blogPlaceholder": "Coming soon",
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
       "cookies": "Cookie Policy",
@@ -429,6 +437,97 @@
       "done": "Done",
       "noKeys": "No API keys yet",
       "noKeysDetail": "Create one to integrate Claude Code, n8n, or Python SDK"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About Costwave",
+      "subtitle": "Costwave unifies AI cost tracking.",
+      "mission": "You use 5 AI providers. You have 5 dashboards. We make it 1."
+    },
+    "why": {
+      "problemTitle": "The problem",
+      "problem": "You use Anthropic for Claude, OpenAI for GPT, Groq for fast inference, Mistral and Google AI. Costs are fragmented. Tracking is manual. Budgets are impossible to manage.",
+      "solutionTitle": "Our solution",
+      "solution": "Costwave aggregates everything. One unified dashboard. Real-time costs. Automatic budget alerts. Native Claude Code integration."
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "step1": {
+        "title": "Connect your providers",
+        "description": "1-click OAuth or paste your API keys. Works with Anthropic, OpenAI, Groq, Mistral, xAI."
+      },
+      "step2": {
+        "title": "See costs in real-time",
+        "description": "Unified dashboard. All providers. All models. Tokens, latency, cost, by period and workflow."
+      },
+      "step3": {
+        "title": "Set budgets and alerts",
+        "description": "Limits by provider, model, or workflow. Alerts at 75%, 90%, 100% thresholds via email, Slack, or webhook."
+      },
+      "step4": {
+        "title": "Ingest API and Claude Code",
+        "description": "Track your personal usage via the Python SDK. Visualize your Claude Code agent activity in the Radar view."
+      }
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Costwave is MIT licensed. The code is auditable. You can self-host it on your own infrastructure.",
+      "verifyCode": "You don't have to trust us. You can verify the code.",
+      "license": "MIT License",
+      "selfHostable": "Self-hostable"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "contact@costwave.app",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "linkedinPlaceholder": "Coming soon"
+    }
+  },
+  "security": {
+    "hero": {
+      "title": "Security",
+      "tagline": "Your API keys, encrypted at rest"
+    },
+    "encryption": {
+      "title": "Encryption and hashing",
+      "passwords": {
+        "title": "User passwords",
+        "algo": "scrypt (Better Auth, RFC 7914)",
+        "description": "Your password is hashed with scrypt before storage. We never store plaintext passwords."
+      },
+      "providerKeys": {
+        "title": "Provider API keys",
+        "algo": "AES-256-GCM + Argon2id",
+        "description": "Your provider API keys are encrypted server-side using AES-256-GCM. The encryption key is derived from a server pepper using Argon2id. Each encryption uses a unique IV. Plaintext keys are never stored."
+      },
+      "costwaveKeys": {
+        "title": "Costwave API keys",
+        "algo": "bcrypt",
+        "description": "Ingest API keys are hashed with bcrypt before storage."
+      }
+    },
+    "architecture": {
+      "title": "Architecture",
+      "description": "Provider API key encryption flow.",
+      "noPlaintext": "Plaintext key NEVER stored",
+      "pepperServerOnly": "ENCRYPTION_PEPPER server-only, never in code"
+    },
+    "openSource": {
+      "title": "Auditable code",
+      "description": "Costwave is open source. You can audit the cryptographic implementation.",
+      "verifyCode": "You don't have to trust us. You can verify the code.",
+      "auditFiles": "Files to audit: /app/src/lib/crypto/"
+    },
+    "selfHostable": {
+      "title": "Self-hosting",
+      "description": "Deploy Costwave on your own infrastructure. Full control over your data. No vendor lock-in.",
+      "cta": "View Deployment Guide"
+    },
+    "compliance": {
+      "title": "Compliance V2",
+      "v2Roadmap": "GDPR compliance and SOC 2 Type II certification are planned for V2. Costwave is currently in beta."
     }
   }
 }

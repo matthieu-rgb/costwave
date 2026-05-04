@@ -356,18 +356,26 @@
     "header": {
       "features": "Features",
       "pricing": "Preise",
+      "about": "Uber uns",
+      "security": "Sicherheit",
       "docs": "Docs",
       "signin": "Anmelden",
       "signup": "Registrieren"
     },
     "footer": {
       "tagline": "LLM-Kosten-Observabilitatsplattform. In Frankreich entwickelt, in Europa betrieben.",
+      "company": "Unternehmen",
+      "resources": "Ressourcen",
       "product": "Produkt",
       "legal": "Rechtliches",
       "connect": "Verbinden",
+      "about": "Uber uns",
+      "security": "Sicherheit",
       "features": "Features",
       "pricing": "Preise",
       "docs": "Dokumentation",
+      "blog": "Blog",
+      "blogPlaceholder": "Bald verfugbar",
       "terms": "Nutzungsbedingungen",
       "privacy": "Datenschutzerklarung",
       "cookies": "Cookie-Richtlinie",
@@ -429,6 +437,97 @@
       "done": "Fertig",
       "noKeys": "Keine API-Schlussel vorhanden",
       "noKeysDetail": "Erstellen Sie einen, um Claude Code, n8n oder das Python-SDK zu integrieren"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Uber Costwave",
+      "subtitle": "Costwave vereinheitlicht das Tracking von KI-Kosten.",
+      "mission": "Sie nutzen 5 KI-Anbieter. Sie haben 5 Dashboards. Wir machen daraus 1."
+    },
+    "why": {
+      "problemTitle": "Das Problem",
+      "problem": "Sie nutzen Anthropic fur Claude, OpenAI fur GPT, Groq fur schnelle Inferenz, Mistral und Google AI. Die Kosten sind fragmentiert. Das Tracking ist manuell. Budgets sind unmoglich zu verwalten.",
+      "solutionTitle": "Unsere Losung",
+      "solution": "Costwave aggregiert alles. Ein einheitliches Dashboard. Echtzeit-Kosten. Automatische Budget-Warnungen. Native Claude Code Integration."
+    },
+    "howItWorks": {
+      "title": "So funktioniert's",
+      "step1": {
+        "title": "Verbinden Sie Ihre Anbieter",
+        "description": "1-Klick OAuth oder fugen Sie Ihre API-Schlussel ein. Funktioniert mit Anthropic, OpenAI, Groq, Mistral, xAI."
+      },
+      "step2": {
+        "title": "Sehen Sie Kosten in Echtzeit",
+        "description": "Einheitliches Dashboard. Alle Anbieter. Alle Modelle. Tokens, Latenz, Kosten, nach Zeitraum und Workflow."
+      },
+      "step3": {
+        "title": "Setzen Sie Budgets und Warnungen",
+        "description": "Limits nach Anbieter, Modell oder Workflow. Warnungen bei 75%, 90%, 100% Schwellenwerten per E-Mail, Slack oder Webhook."
+      },
+      "step4": {
+        "title": "Ingest API und Claude Code",
+        "description": "Verfolgen Sie Ihre personliche Nutzung uber das Python SDK. Visualisieren Sie Ihre Claude Code Agent-Aktivitat in der Radar-Ansicht."
+      }
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Costwave ist MIT-lizenziert. Der Code ist auditierbar. Sie konnen es auf Ihrer eigenen Infrastruktur selbst hosten.",
+      "verifyCode": "Sie mussen uns nicht vertrauen. Sie konnen den Code uberprufen.",
+      "license": "MIT-Lizenz",
+      "selfHostable": "Selbst hostbar"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "email": "contact@costwave.app",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "linkedinPlaceholder": "Bald verfugbar"
+    }
+  },
+  "security": {
+    "hero": {
+      "title": "Sicherheit",
+      "tagline": "Ihre API-Schlussel, verschlusselt im Ruhezustand"
+    },
+    "encryption": {
+      "title": "Verschlusselung und Hashing",
+      "passwords": {
+        "title": "Benutzerpassworter",
+        "algo": "scrypt (Better Auth, RFC 7914)",
+        "description": "Ihr Passwort wird vor der Speicherung mit scrypt gehasht. Wir speichern niemals Klartext-Passworter."
+      },
+      "providerKeys": {
+        "title": "Provider-API-Schlussel",
+        "algo": "AES-256-GCM + Argon2id",
+        "description": "Ihre Provider-API-Schlussel werden serverseitig mit AES-256-GCM verschlusselt. Der Verschlusselungsschlussel wird aus einem Server-Pepper mittels Argon2id abgeleitet. Jede Verschlusselung verwendet einen eindeutigen IV. Klartext-Schlussel werden niemals gespeichert."
+      },
+      "costwaveKeys": {
+        "title": "Costwave-API-Schlussel",
+        "algo": "bcrypt",
+        "description": "Ingest-API-Schlussel werden vor der Speicherung mit bcrypt gehasht."
+      }
+    },
+    "architecture": {
+      "title": "Architektur",
+      "description": "Verschlusselungsfluss fur Provider-API-Schlussel.",
+      "noPlaintext": "Klartext-Schlussel NIEMALS gespeichert",
+      "pepperServerOnly": "ENCRYPTION_PEPPER nur auf dem Server, niemals im Code"
+    },
+    "openSource": {
+      "title": "Auditierbarer Code",
+      "description": "Costwave ist Open Source. Sie konnen die kryptografische Implementierung prufen.",
+      "verifyCode": "Sie mussen uns nicht vertrauen. Sie konnen den Code uberprufen.",
+      "auditFiles": "Zu prufen: /app/src/lib/crypto/"
+    },
+    "selfHostable": {
+      "title": "Selbst-Hosting",
+      "description": "Deployen Sie Costwave auf Ihrer eigenen Infrastruktur. Volle Kontrolle uber Ihre Daten. Kein Vendor Lock-in.",
+      "cta": "Deployment-Anleitung Ansehen"
+    },
+    "compliance": {
+      "title": "Compliance V2",
+      "v2Roadmap": "DSGVO-Compliance und SOC 2 Type II Zertifizierung sind fur V2 geplant. Costwave befindet sich derzeit in der Beta."
     }
   }
 }
