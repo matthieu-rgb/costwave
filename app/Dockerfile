@@ -16,8 +16,7 @@ WORKDIR /app
 
 # Install all dependencies (including dev)
 COPY package.json package-lock.json ./
-RUN npm ci
-
+RUN npm install --no-audit --no-fund
 # Copy source code
 COPY . .
 
